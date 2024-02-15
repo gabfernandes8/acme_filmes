@@ -39,10 +39,29 @@ const getListarFilmes = async() => {
 // função para buscar um filme pelo ID
 const getBuscarFilme = async() => {}
 
+// função para buscar um filme filtrando pelo nome
+const getFilmeByNome = async(nome) => {
+    let filmesJSON = {}
+
+    let filtro = nome
+    
+    let dadosFilmes = await filmesDAO.selectByNome(filtro)
+
+    if (dadosFilmes){
+        filmesJSON.filmes = dadosFilmes
+        filmesJSON.qt = dadosFilmes.length 
+        filmesJSON.status_code = 200
+        return filmesJSON
+    } else {
+        return false
+    }
+}
+
 module.exports={
     setNovoFilme,
     setAtualizarFilme,
     setExcluirFilme,
     getListarFilmes,
-    getBuscarFilme
+    getBuscarFilme,
+    getFilmeByNome
 }

@@ -74,5 +74,22 @@ app.get('/v2/acme_filmes/filmes', cors(), async(request, response, next) => {
     }
 })
 
+app.get('/v2/acme_filmes/filmes/filtro', cors(), async(request, response, next) => {
+
+    let filtro = request.query.nome
+    
+    // chama a função para retornar os dados do filme
+    let dadosFilmes = await controllerFilmes.getFilmeByNome(filtro)
+
+    // validação para verificar se existem dados
+    if (dadosFilmes){
+        response.json(dadosFilmes)
+        response.status(200)
+    } else {
+        response.json({message: "Nenhum registro encontrado"})
+        response.status(404)
+    }
+})
+
 
 app.listen(8080, () => {})
