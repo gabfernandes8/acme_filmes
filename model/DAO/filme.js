@@ -6,57 +6,70 @@
 ***************************************************************************************/
 
 // import da biblioteca do prisma client
-const {PrismaClient} = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client')
 
 // instanciando o objeto prisma com as caracteristicas do prisma client
 const prisma = new PrismaClient
 
 // inserir um novo filme
-const insertFilme = async() => {}
+const insertFilme = async () => { }
 
 // atualizar um filme existente filtrando pelo ID
-const updateFilme = async(id) => {}
+const updateFilme = async (id) => { }
 
 // excluir um filme existente filtrando pelo ID
-const deleteFilme = async(id) => {}
+const deleteFilme = async (id) => { }
 
 // listar todos os filmes
-const selectAllFilmes = async() => {
-    let sql = 'select * from tbl_filme'
+const selectAllFilmes = async () => {
 
-    // $queryrawUnsafe(‘encaminha apenas a variavel’)
-    // $queryRaw(‘codigo digitado aqui’)
-
-    // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsFilmes
-    let rsFilmes = await prisma.$queryRawUnsafe(sql)
-
-    // tratamento de erro para retornar os dados ou retornar falsy
-    if (rsFilmes.length > 0) {
+    try {
+        let sql = 'select * from tbl_filme'
+    
+        // $queryrawUnsafe(‘encaminha apenas a variavel’)
+        // $queryRaw(‘codigo digitado aqui’)
+    
+        // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsFilmes
+        let rsFilmes = await prisma.$queryRawUnsafe(sql)
         return rsFilmes
-    } else {
+    } catch (error) {
         return false
     }
-
 }
 
 // buscar o filme existente filtrando pelo ID
-const selectByIdFilme = async(id) => {}
+const selectByIdFilme = async (id) => {
 
-const selectByNome = async(nome) => {
-    let sql = `select * from tbl_filme where nome like '%${nome}%'`
-    
-    // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsFilmes
-    let rsFilmes = await prisma.$queryRawUnsafe(sql)
+    try {
 
-    // tratamento de erro para retornar os dados ou retornar falsy
-    if (rsFilmes.length > 0) {
+        // realiza a busca do filme pelo id
+        let sql = `select * from tbl_filme where id=${id}`
+
+        // executa no DBA o script SQL
+        let rsFilmes = await prisma.$queryRawUnsafe(sql)
         return rsFilmes
-    } else {
+
+    } catch (error) {
         return false
     }
 }
 
-module.exports={
+const selectByNome = async (nome) => {
+    
+    try {
+        let sql = `select * from tbl_filme where nome like '%${nome}%'`
+    
+        // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsFilmes
+        let rsFilmes = await prisma.$queryRawUnsafe(sql)
+        console.log('to aqui 3')
+
+        return rsFilmes
+    } catch (error) {
+        return false
+    }
+}
+
+module.exports = {
     insertFilme,
     updateFilme,
     deleteFilme,
