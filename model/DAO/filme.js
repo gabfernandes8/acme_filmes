@@ -12,7 +12,40 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient
 
 // inserir um novo filme
-const insertFilme = async () => { }
+const insertFilme = async (dadosFilme) => {
+    try {
+        let sql = `insert into tbl_filme (
+                                            nome, 
+                                            sinopse, 
+                                            duracao, 
+                                            data_lancamento,
+                                            data_relancamento,
+                                            foto_capa,
+                                            valor_unitario
+                                        )values (
+                                            '${dadosFilme.nome}',
+                                            '${dadosFilme.sinopse}',
+                                            '${dadosFilme.duracao}',
+                                            '${dadosFilme.data_lancamento}',
+                                            '${dadosFilme.foto_capa}',
+                                            '${dadosFilme.valor_unitario}',
+                                        )`
+
+    // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
+    // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
+    let result = await prisma.$executeRawUnsafe(sql)
+
+    } catch (error) {
+        
+        // validação para verificar se o insert funcionou no DB
+        if(result){
+            return true
+        } else {
+            return false
+        }
+
+    }
+}
 
 // atualizar um filme existente filtrando pelo ID
 const updateFilme = async (id) => { }

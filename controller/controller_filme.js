@@ -13,7 +13,48 @@ const filmesDAO = require('../model/DAO/filme.js')
 const message = require('../modulo/config.js')
 
 // função para inserir um novo filme no DBA
-const setNovoFilme = async () => { }
+const setNovoFilme = async (dadosFilme) => {
+
+    // cria a variável JSON
+    let resultDadosFilme = {}
+
+    //Validação para verificar campos obrigatórios e conistência de dados
+    if( dadosFilme.nome == ''               || dadosFilme.nome == undefined              || dadosFilme.nome.length > 80               ||
+        dadosFilme.sinopse == ''            || dadosFilme.sinopse == undefined           || dadosFilme.sinopse.length > 65535         || 
+        dadosFilme.duracao == ''            || dadosFilme.duracao == undefined           || dadosFilme.duracao.length > 18            || 
+        dadosFilme.data_lancamento == ''    || dadosFilme.data_lancamento == undefined   || dadosFilme.data_lancamento.length > 10    || 
+        dadosFilme.foto_capa == ''          || dadosFilme.foto_capa == undefined         || dadosFilme.foto_capa.length > 200         ||
+        dadosFilme.data_relancamento.length > 200 ||
+        dadosFilme.valor_unitario.length > 200  
+     ){
+        
+        return message.ERROR_REQUIRED_FIELDS; // 400
+
+     }else{
+
+        //envia os dados para o DAO inserir no BD
+        let novoFilme = await alunoDAO.insertAluno(dadosFilme);
+
+        //validação para verificar se os dados foram inseridos pelo DAO no BD 
+        if(novoFilme){
+
+            // cria o padrão de JSON para retorno dos dados criados no DB
+            resultDadosFilme.status = message.SUCCESS_CREATED_ITEM.status
+            resultDadosFilme.status_code = message.SUCCESS_CREATED_ITEM.status_code
+            resultDadosFilme.message = message.SUCCESS_CREATED_ITEM
+            resultDadosFilme.filme = dadosFilme
+
+            return resultDadosFilme
+
+        } else {
+
+            return message.ERROR_INTERNAL_SERVER_DB; // 500
+
+        }
+
+    }
+
+}
 
 //função para atualizar um filme existente
 const setAtualizarFilme = async () => { }
