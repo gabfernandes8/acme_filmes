@@ -14,22 +14,49 @@ const prisma = new PrismaClient
 // inserir um novo filme
 const insertFilme = async (dadosFilme) => {
     try {
-        let sql = `insert into tbl_filme (
-                                            nome, 
-                                            sinopse, 
-                                            duracao, 
-                                            data_lancamento,
-                                            data_relancamento,
-                                            foto_capa,
-                                            valor_unitario
-                                        )values (
-                                            '${dadosFilme.nome}',
-                                            '${dadosFilme.sinopse}',
-                                            '${dadosFilme.duracao}',
-                                            '${dadosFilme.data_lancamento}',
-                                            '${dadosFilme.foto_capa}',
-                                            '${dadosFilme.valor_unitario}',
-                                        )`
+
+        let sql
+
+        if(dadosFilme.data_relancamento == null){
+
+            sql = `insert into tbl_filme (
+                                                nome, 
+                                                sinopse, 
+                                                duracao, 
+                                                data_lancamento,
+                                                data_relancamento,
+                                                foto_capa,
+                                                valor_unitario
+                                            )values (
+                                                '${dadosFilme.nome}',
+                                                '${dadosFilme.sinopse}',
+                                                '${dadosFilme.duracao}',
+                                                '${dadosFilme.data_lancamento}',
+                                                null,
+                                                '${dadosFilme.foto_capa}',
+                                                '${dadosFilme.valor_unitario}',
+                                            )`
+
+        } else {
+            sql = `insert into tbl_filme (
+                                                nome, 
+                                                sinopse, 
+                                                duracao, 
+                                                data_lancamento,
+                                                data_relancamento,
+                                                foto_capa,
+                                                valor_unitario
+                                            )values (
+                                                '${dadosFilme.nome}',
+                                                '${dadosFilme.sinopse}',
+                                                '${dadosFilme.duracao}',
+                                                '${dadosFilme.data_lancamento}',
+                                                '${dadosFilme.data_relancamento}',
+                                                '${dadosFilme.foto_capa}',
+                                                '${dadosFilme.valor_unitario}',
+                                            )`
+        }
+
 
     // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
     // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
