@@ -6,19 +6,93 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./assets/img/acme-filmes-logo 1.png" type="image/x-icon">
     <link rel="stylesheet" href="./output.css">
     <title>ACME Filmes</title>
 </head>
-<body class=" relative gap-4 h-screen flex items-center justify-center flex-col bg-[url('https://poltronadecinema.com.br/filmes/wp-content/uploads/2019/11/filmes-gratis-online-1024x576.jpg')] bg-cover bg-no-repeat">
+<body class="font-font relative gap-4 h-screen flex items-center justify-center flex-col bg-[url('https://poltronadecinema.com.br/filmes/wp-content/uploads/2019/11/filmes-gratis-online-1024x576.jpg')] bg-cover bg-no-repeat">
     <div class="fixed inset-0  bg-black/80"></div>
     <header class="z-10">
         <img src="./assets/img/acme-filmes-logo 1.png" alt="" class="drop-shadow-2xl h-16">
     </header>
-    <main class="z-10 overflow-hidden grid grid-cols-2 h-3/5 w-[40vw] bg-white rounded-3xl">
-        <div class="">
-            <h3>ENTRAR</h3>
+
+    <main class="z-10 overflow-hidden grid grid-cols-2 h-[65vh] w-[40vw] bg-white rounded-3xl">
+        <form class="flex flex-col justify-around items-center">
+            <span class="font-semibold text-2xl">
+                ENTRAR
+            </span>
+            
+            <fieldset class="flex flex-col w-full gap-5 justify-center items-center px-16">
+                <div class="flex flex-col w-full justify-center gap-1">
+                    <label for="email" class="text-xl">
+                        Digite seu email:
+                    </label>
+                    <input type="email" class="bg-blue/60 rounded-3xl p-2 focus:outline-none text-black/70">
+                </div>
+    
+                <div class="flex flex-col w-full justify-center gap-1">
+                    <label for="password" class="text-xl">
+                        Digite sua senha:
+                    </label>
+                    <input type="password" class="bg-blue/60 rounded-3xl p-2 focus:outline-none text-black/70">
+                </div>
+
+                <p class="font-bold text-red-500 text-xl">
+                    Esqueci minha senha
+                </P>
+            </fieldset>
+
+            <button class="border-solid border-maroon border-[1px] shadow-[-0px_3px_3px_0px_rgba(0,0,0,0.50)] px-5 py-2 text-xl">
+                Entrar
+            </button>
+        </form>
+        
+        <div class="bg-blue h-full rounded-l-3xl flex items-center justify-center">
+            <form class="flex flex-col justify-evenly items-center h-full w-full px-10">
+                <span class="text-white font-light text-xl">
+                    Não tem uma conta?
+                </span>
+
+                <span class="font-semibold text-2xl">
+                    CADASTRAR
+                </span>
+
+                <fieldset class="flex flex-col w-full gap-5 justify-center items-center">
+                    <div class="flex flex-col w-full justify-center gap-1">
+                        <label for="name" class="text-xl">
+                            Nome:
+                        </label>
+                        <input type="name" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-black/70">
+                    </div>
+        
+                    <div class="flex flex-col w-full justify-center gap-1">
+                        <label for="date" class="text-xl">
+                            Data de nascimento:
+                        </label>
+                        <input type="date" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-maroon/60">
+                    </div>
+
+                    <div class="flex flex-col w-full justify-center gap-1">
+                        <label for="email" class="text-xl">
+                            Digite seu email:
+                        </label>
+                        <input type="email" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-black/70">
+                    </div>
+        
+                    <div class="flex flex-col w-full justify-center gap-1">
+                        <label for="password" class="text-xl">
+                            Digite sua senha:
+                        </label>
+                        <input type="password" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-black/70">
+                    </div>
+                </fieldset>
+
+                <button class="border-solid border-maroon border-[1px] shadow-[-0px_3px_3px_0px_rgba(0,0,0,0.50)] px-5 py-2 text-xl">
+                    Cadastrar
+                </button>
+
+            </form>
         </div>
-        <div class="bg-blue h-full rounded-l-3xl"></div>
     </main>
 </body>
 </html>
