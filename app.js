@@ -114,4 +114,15 @@ app.post('/v2/acme_filmes/filme', cors(), bodyParserJSON, async(request, respons
 
 })
 
+app.delete('/v2/acme_filmes/filme/:id', cors(), async(request, response, next) => {
+
+    let filme = request.params.id
+
+    let dadosFilme = await controllerFilmes.setExcluirFilme(filme)
+
+    response.status(dadosFilme.status_code)
+    response.json(dadosFilme)
+
+})
+
 app.listen(8080, () => {})

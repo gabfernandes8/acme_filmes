@@ -84,7 +84,23 @@ const insertFilme = async (dadosFilme) => {
 const updateFilme = async (id) => { }
 
 // excluir um filme existente filtrando pelo ID
-const deleteFilme = async (id) => { }
+const deleteFilme = async (id) => {
+
+    try {
+        
+        let sql = `delete from tbl_filme where id = ${id}`
+
+        // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsFilmes
+        let rsFilmes = await prisma.$queryRawUnsafe(sql)
+        
+        return rsFilmes
+        
+    } catch (error) {
+        
+        return false
+    }
+
+}
 
 // listar todos os filmes
 const selectAllFilmes = async () => {

@@ -15,77 +15,86 @@ const message = require('../modulo/config.js')
 // função para inserir um novo filme no DBA
 const setNovoFilme = async (dadosFilme, contentType) => {
 
-    if (String(contentType).toLowerCase() == 'application/json'){
+    try {
 
-        // cria a variável JSON
-        let resultDadosFilme = {}
-    
-        //Validação para verificar campos obrigatórios e conistência de dados
-        if (dadosFilme.nome == ''            || dadosFilme.nome == undefined            || dadosFilme.nome.length > 80 ||
-            dadosFilme.sinopse == ''         || dadosFilme.sinopse == undefined         || dadosFilme.sinopse.length > 65535 ||
-            dadosFilme.duracao == ''         || dadosFilme.duracao == undefined         || dadosFilme.duracao.length > 18 ||
-            dadosFilme.data_lancamento == '' || dadosFilme.data_lancamento == undefined || dadosFilme.data_lancamento.length > 10 ||
-            dadosFilme.foto_capa == ''       || dadosFilme.foto_capa == undefined       || dadosFilme.foto_capa.length > 200 ||
-            dadosFilme.valor_unitario.length > 200
-        ) {
-    
-            return message.ERROR_REQUIRED_FIELDS; // 400
-    
-        } else {
-    
-            // variável para lidar se poderemos chamar o DAO para inserir os dados
-            let dadosValitaded = false
-    
-            
-            // validação de digitação  para data de relançamento que não é um campo obrigatório
-            if (dadosFilme.data_relancamento != null && dadosFilme.data_relancamento != '' && dadosFilme.data_relancamento != undefined) {
-                
-                
-                if (dadosFilme.data_relancamento.length != 10) {
-                    
-                    return message.ERROR_REQUIRED_FIELDS
-                    
+        if (String(contentType).toLowerCase() == 'application/json') {
+
+            // cria a variável JSON
+            let resultDadosFilme = {}
+
+            //Validação para verificar campos obrigatórios e conistência de dados
+            if (dadosFilme.nome == '' || dadosFilme.nome == undefined || dadosFilme.nome.length > 80 ||
+                dadosFilme.sinopse == '' || dadosFilme.sinopse == undefined || dadosFilme.sinopse.length > 65535 ||
+                dadosFilme.duracao == '' || dadosFilme.duracao == undefined || dadosFilme.duracao.length > 18 ||
+                dadosFilme.data_lancamento == '' || dadosFilme.data_lancamento == undefined || dadosFilme.data_lancamento.length > 10 ||
+                dadosFilme.foto_capa == '' || dadosFilme.foto_capa == undefined || dadosFilme.foto_capa.length > 200 ||
+                dadosFilme.valor_unitario.length > 200
+            ) {
+
+                return message.ERROR_REQUIRED_FIELDS; // 400
+
+            } else {
+
+                // variável para lidar se poderemos chamar o DAO para inserir os dados
+                let dadosValitaded = false
+
+
+                // validação de digitação  para data de relançamento que não é um campo obrigatório
+                if (dadosFilme.data_relancamento != null && dadosFilme.data_relancamento != '' && dadosFilme.data_relancamento != undefined) {
+
+
+                    if (dadosFilme.data_relancamento.length != 10) {
+
+                        return message.ERROR_REQUIRED_FIELDS
+
+                    } else {
+                        dadosValitaded = true
+                    }
+
                 } else {
                     dadosValitaded = true
                 }
-                
-            } else {
-                dadosValitaded = true
-            }
-            
-            if (dadosValitaded) {
-                
-                //envia os dados para o DAO inserir no BD
-                let novoFilme = await filmesDAO.insertFilme(dadosFilme);
-    
-                //validação para verificar se os dados foram inseridos pelo DAO no BD 
-                if (novoFilme) {
-    
-                    let id = await filmesDAO.selectLastId()
-    
-                    dadosFilme.id = Number(id[0].id)
-    
-                    // cria o padrão de JSON para retorno dos dados criados no DB
-                    resultDadosFilme.status = message.SUCCESS_CREATED_ITEM.status
-                    resultDadosFilme.status_code = message.SUCCESS_CREATED_ITEM.status_code
-                    resultDadosFilme.message = message.SUCCESS_CREATED_ITEM.message
-                    resultDadosFilme.filme = dadosFilme
-    
-                    return resultDadosFilme
-    
-                } else {
-    
-                    return message.ERROR_INTERNAL_SERVER_DBA; // 500
-    
+
+                if (dadosValitaded) {
+
+                    //envia os dados para o DAO inserir no BD
+                    let novoFilme = await filmesDAO.insertFilme(dadosFilme);
+
+                    //validação para verificar se os dados foram inseridos pelo DAO no BD 
+                    if (novoFilme) {
+
+                        let id = await filmesDAO.selectLastId()
+
+                        dadosFilme.id = Number(id[0].id)
+
+                        // cria o padrão de JSON para retorno dos dados criados no DB
+                        resultDadosFilme.status = message.SUCCESS_CREATED_ITEM.status
+                        resultDadosFilme.status_code = message.SUCCESS_CREATED_ITEM.status_code
+                        resultDadosFilme.message = message.SUCCESS_CREATED_ITEM.message
+                        resultDadosFilme.filme = dadosFilme
+
+                        return resultDadosFilme
+
+                    } else {
+
+                        return message.ERROR_INTERNAL_SERVER_DBA; // 500
+
+                    }
+
                 }
-    
+
             }
-    
+
+        } else {
+            return message.ERROR_CONTENT_TYPE //415
         }
 
-    } else {
-        return message.ERROR_CONTENT_TYPE //415
+    } catch (error) {
+
+        return message.ERROR_INTERNAL_SERVER // 500
+
     }
+
 
 }
 
@@ -93,7 +102,34 @@ const setNovoFilme = async (dadosFilme, contentType) => {
 const setAtualizarFilme = async () => { }
 
 // função para excluir um filme existente
-const setExcluirFilme = async () => { }
+const setExcluirFilme = async (id) => {
+
+    try {
+
+        let filme = id
+        let resultDadosFilme
+
+        if (filme == '' || filme == undefined || isNaN(filme)) {
+
+            return message.ERROR_INVALID_ID // 400
+
+        } else {
+
+            //Envia os dados para a model inserir no BD
+            resultDadosFilme = await filmesDAO.deleteFilme(filme)
+
+            //Valida se o BD inseriu corretamente os dados
+            if (resultDadosFilme)
+                return message.SUCCESS_DELETED_ITEM // 200
+            else
+                return message.ERROR_INTERNAL_SERVER_DB // 500
+
+        }
+        
+    } catch (error) {
+        message.ERROR_INTERNAL_SERVER // 500
+    }
+}
 
 // função para listar todos os filmes existentes no DBA
 const getListarFilmes = async () => {

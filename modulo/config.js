@@ -43,10 +43,25 @@ const ERROR_CONTENT_TYPE = {
     message: "O Content-Type da requisição não é supotado. Os dados precisam ser encaminhados no formato application/json."
 }
 
+const ERROR_INTERNAL_SERVER = {
+    status: false, 
+    status_code: 500, 
+    message: "Ocoreram erros internos no servidor na camada de negócio da API. Por favor, contate o administrador do sistema."
+}
+
+
+/***** MENSAGENS DE SUCESSO *****/
+
 const SUCCESS_CREATED_ITEM = {
     status: true, 
     status_code: 201, 
     message: "Item criado com sucesso.", 
+}
+
+const SUCCESS_DELETED_ITEM = {
+    status: true, 
+    status_code: 201, 
+    message: "Item deletado com sucesso.", 
 }
 
 module.exports = {
@@ -56,5 +71,7 @@ module.exports = {
     ERROR_INTERNAL_SERVER_DBA,
     ERROR_INVALID_PARAM,
     ERROR_CONTENT_TYPE,
-    SUCCESS_CREATED_ITEM
+    ERROR_INTERNAL_SERVER,
+    SUCCESS_CREATED_ITEM,
+    SUCCESS_DELETED_ITEM
 }
