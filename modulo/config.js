@@ -37,6 +37,12 @@ const ERROR_INVALID_PARAM = {
     message: "O parâmetro encaminhado não é válido."
 }
 
+const ERROR_CONTENT_TYPE = {
+    status: false, 
+    status_code: 415, 
+    message: "O Content-Type da requisição não é supotado. Os dados precisam ser encaminhados no formato application/json."
+}
+
 const SUCCESS_CREATED_ITEM = {
     status: true, 
     status_code: 201, 
@@ -49,5 +55,6 @@ module.exports = {
     ERROR_NOT_FOUND,
     ERROR_INTERNAL_SERVER_DBA,
     ERROR_INVALID_PARAM,
+    ERROR_CONTENT_TYPE,
     SUCCESS_CREATED_ITEM
 }

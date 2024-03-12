@@ -100,11 +100,14 @@ app.get('/v2/acme_filmes/filme/:id', cors(), async(request, response, next) => {
     // obs: esse objeto foi criado no início do projeto
 app.post('/v2/acme_filmes/filme', cors(), bodyParserJSON, async(request, response, next) => {
 
+    // recebe o content type da requisição (A API deve receber somente application/json)
+    let contentType = request.headers['content-type']
+
     //recebe os dados encaminhados na requisição no body(JSON)
     let dadosBody = request.body
 
     // encaminha os dados da requisição para a controller enviar para o BD
-    let resultDados = await controllerFilmes.setNovoFilme(dadosBody)
+    let resultDados = await controllerFilmes.setNovoFilme(dadosBody, contentType)
     
     response.status(resultDados.status_code)
     response.json(resultDados)
