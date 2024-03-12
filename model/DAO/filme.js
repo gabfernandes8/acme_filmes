@@ -12,7 +12,73 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient
 
 // inserir um novo filme
-const insertFilme = async () => { }
+const insertFilme = async (dadosFilme) => {
+    try {
+
+        let sql
+
+        if(dadosFilme.data_relancamento == null || dadosFilme.data_relancamento == '' || dadosFilme.data_relancamento == undefined){
+
+            sql = `insert into tbl_filme (
+                                                nome, 
+                                                sinopse, 
+                                                duracao, 
+                                                data_lancamento,
+                                                data_relancamento,
+                                                foto_capa,
+                                                valor_unitario
+                                            )values (
+                                                '${dadosFilme.nome}',
+                                                '${dadosFilme.sinopse}',
+                                                '${dadosFilme.duracao}',
+                                                '${dadosFilme.data_lancamento}',
+                                                null,
+                                                '${dadosFilme.foto_capa}',
+                                                ${dadosFilme.valor_unitario}
+                                            )`
+
+        } else {
+            sql = `insert into tbl_filme (
+                                                nome, 
+                                                sinopse, 
+                                                duracao, 
+                                                data_lancamento,
+                                                data_relancamento,
+                                                foto_capa,
+                                                valor_unitario
+                                            )values (
+                                                '${dadosFilme.nome}',
+                                                '${dadosFilme.sinopse}',
+                                                '${dadosFilme.duracao}',
+                                                '${dadosFilme.data_lancamento}',
+                                                '${dadosFilme.data_relancamento}',
+                                                '${dadosFilme.foto_capa}',
+                                                ${dadosFilme.valor_unitario}
+                                            )`
+        }
+
+        console.log(sql)
+
+    // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
+    // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
+    let result = await prisma.$executeRawUnsafe(sql)
+
+    console.log(result)
+
+    // validação para verificar se o insert funcionou no DB
+    if(result){
+        return true
+    } else {
+        return false
+    }
+    
+    
+} catch (error) {
+    
+    return false
+
+    }
+}
 
 // atualizar um filme existente filtrando pelo ID
 const updateFilme = async (id) => { }
@@ -24,7 +90,7 @@ const deleteFilme = async (id) => { }
 const selectAllFilmes = async () => {
 
     try {
-        let sql = 'select * from tbl_filme'
+        let sql = 'select * from tbl_filme order by id desc'
     
         // $queryrawUnsafe(‘encaminha apenas a variavel’)
         // $queryRaw(‘codigo digitado aqui’)
@@ -69,11 +135,27 @@ const selectByNome = async (nome) => {
     }
 }
 
+const selectLastId = async () => {
+    try {
+
+        let sql = 'select cast(last_insert_id() as DECIMAL) as id from tbl_filme limit 1' 
+
+        let rsFilmes = await prisma.$queryRawUnsafe(sql)
+        return rsFilmes
+
+    } catch (error) {
+
+        return false
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+    }
+}
+
 module.exports = {
     insertFilme,
     updateFilme,
     deleteFilme,
     selectAllFilmes,
     selectByIdFilme,
-    selectByNome
+    selectByNome,
+    selectLastId
 }
