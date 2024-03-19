@@ -78,8 +78,6 @@ app.get('/v2/acme_filmes/filmes/filtro', cors(), async(request, response, next) 
     // chama a função para retornar os dados do filme
     let dadosFilmes = await controllerFilmes.getFilmeByNome(filtro)
 
-    console.log('to aqui')
-
     response.status(dadosFilmes.status_code)
     response.json(dadosFilmes)
 })
@@ -125,13 +123,22 @@ app.delete('/v2/acme_filmes/filme/:id', cors(), async(request, response, next) =
 
 })
 
-app.put('/v2/acme_filmes/filme/:id', cors(), async(request, response, next) => {
+app.put('/v2/acme_filmes/filme/:id', cors(), bodyParserJSON, async(request, response, next) => {
 
     let filme = request.params.id
 
-    let dadosFilme = await controllerFilmes.u
-    response.status(dadosFilme.status_code)
-    response.json(dadosFilme)
+    // recebe o content type da requisição (A API deve receber somente application/json)
+    let contentType = request.headers['content-type']
+
+    //recebe os dados encaminhados na requisição no body(JSON)
+    let dadosBody = request.body
+
+    // encaminha os dados da requisição para a controller enviar para o BD
+    let resultDados = await controllerFilmes.setAtualizarFilme(dadosBody, contentType, filme)
+    
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+
 
 })
 

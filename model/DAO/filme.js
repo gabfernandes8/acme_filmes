@@ -57,13 +57,9 @@ const insertFilme = async (dadosFilme) => {
                                             )`
         }
 
-        console.log(sql)
-
     // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
     // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
     let result = await prisma.$executeRawUnsafe(sql)
-
-    console.log(result)
 
     // validação para verificar se o insert funcionou no DB
     if(result){
@@ -81,7 +77,7 @@ const insertFilme = async (dadosFilme) => {
 }
 
 // atualizar um filme existente filtrando pelo ID
-const updateFilme = async (dadosFilme) => {
+const updateFilme = async (dadosFilme, id) => {
     
     try {
 
@@ -98,7 +94,7 @@ const updateFilme = async (dadosFilme) => {
                                         foto_capa = "${dadosFilme.foto_capa}",
                                         valor_unitario = ${dadosFilme.valor_unitario}
                                         
-                                        where id = ${dadosFilme.id}`
+                                        where id = ${id}`
         } else {
             sql = `update tbl_filme set  
                                         nome = "${dadosFilme.nome}",
@@ -109,14 +105,13 @@ const updateFilme = async (dadosFilme) => {
                                         foto_capa = "${dadosFilme.foto_capa}",
                                         valor_unitario = ${dadosFilme.valor_unitario}
                                         
-                                        where id = ${dadosFilme.id}`
+                                        where id = ${id}`
         }
 
             // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
             // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
             let result = await prisma.$executeRawUnsafe(sql)
-
-            console.log(result)
+            
 
             // validação para verificar se o insert funcionou no DB
             if(result){
@@ -193,7 +188,6 @@ const selectByNome = async (nome) => {
     
         // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsFilmes
         let rsFilmes = await prisma.$queryRawUnsafe(sql)
-        console.log('to aqui 3')
 
         return rsFilmes
     } catch (error) {
