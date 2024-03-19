@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/acme-filmes-logo 1.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../output.css">
+    <script src="../js/filmes.js" type="module" defer></script>
+    <title>Adicionar filme</title>
+</head>
+<body class="min-h-screen bg-[url('https://poltronadecinema.com.br/filmes/wp-content/uploads/2019/11/filmes-gratis-online-1024x576.jpg')] bg-cover bg-no-repeat">
+    <div class="fixed inset-0  bg-black/80 -z-10"></div>
+
+    <header class="">
+        <img src="../img/acme-filmes-logo 1.png" alt="" class="p-8">
+    </header>
+
+    <main class="flex flex-col items-center">
+        <div class="flex w-screen justify-center p-5">
+            <span class="text-white font-font text-4xl">Adicionar filme</span>
+        </div>
+        <div class="bg-white h-[68vh] w-[120vh]">
+            <form action="flex">
+                <div class="flex flex-col w-1/2">
+                    <label for="">
+                        Nome:
+                    </label>
+                    <input type="text" class="bg-blue rounded-lg h-10">
+                </div>
+                <div class="flex flex-col w-1/2">
+                    <label for="">
+                        Sinopse:
+                    </label>
+                    <input type="text" class="bg-blue rounded-lg h-10">
+                </div>
+                <div class="flex flex-col w-1/2">
+                    <label for="">
+                        Duração:
+                    </label>
+                    <input type="time" class="bg-blue rounded-lg h-10">
+                </div>
+                <div class="flex flex-col w-1/2">
+                    <label for="date">
+                        Data de lançamento:
+                    </label>
+                    <input type="date" class="bg-blue rounded-lg h-10">
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
