@@ -125,4 +125,14 @@ app.delete('/v2/acme_filmes/filme/:id', cors(), async(request, response, next) =
 
 })
 
+app.put('/v2/acme_filmes/filme/:id', cors(), async(request, response, next) => {
+
+    let filme = request.params.id
+
+    let dadosFilme = await controllerFilmes.u
+    response.status(dadosFilme.status_code)
+    response.json(dadosFilme)
+
+})
+
 app.listen(8080, () => {})

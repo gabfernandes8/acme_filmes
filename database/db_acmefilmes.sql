@@ -16,6 +16,7 @@ create table tbl_filme
     unique key (id)
 );
 
+-- POST
 insert into tbl_filme (nome, sinopse, duracao, data_lancamento, data_relancamento, foto_capa, valor_unitario)values
 ("Teen Beach Movie", 
 "Brady e McKenie são dois jovens surfistas que magicamente se tornam parte de um filme musical. Ao perceber que sua presença está alterando o roteiro original do filme, eles se esforçam para fazer tudo voltar ao normal e acabam se apaixonando.",
@@ -32,4 +33,13 @@ null,
 "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS3KC5CYzKSIx0aKLEL-lYfeeF7lfTqcd4nVGWOwO2IZaBzfdaz",
 15.21);
 
+-- GET
 select * from tbl_filme where nome like '%be%';
+
+-- DELETE
+delete from tbl_filme where id = 1;
+
+-- PUT
+update tbl_filme set 
+					data_relancamento="2024-08-08",
+                    sinopse="Uma versão melhorada de TB2";

@@ -81,7 +81,57 @@ const insertFilme = async (dadosFilme) => {
 }
 
 // atualizar um filme existente filtrando pelo ID
-const updateFilme = async (id) => { }
+const updateFilme = async (dadosFilme) => {
+    
+    try {
+
+        let sql
+
+        if(dadosFilme.data_relancamento == null || dadosFilme.data_relancamento == '' || dadosFilme.data_relancamento == undefined){
+
+            sql = `update tbl_filme set  
+                                        nome = "${dadosFilme.nome}",
+                                        sinopse = "${dadosFilme.sinopse}", 
+                                        duracao = "${dadosFilme.duracao}", 
+                                        data_lancamento = "${dadosFilme.data_lancamento}",
+                                        data_lancamento = null,
+                                        foto_capa = "${dadosFilme.foto_capa}",
+                                        valor_unitario = ${dadosFilme.valor_unitario}
+                                        
+                                        where id = ${dadosFilme.id}`
+        } else {
+            sql = `update tbl_filme set  
+                                        nome = "${dadosFilme.nome}",
+                                        sinopse = "${dadosFilme.sinopse}", 
+                                        duracao = "${dadosFilme.duracao}", 
+                                        data_lancamento = "${dadosFilme.data_lancamento}",
+                                        data_relancamento = "${dadosFilme.data_relancamento}",
+                                        foto_capa = "${dadosFilme.foto_capa}",
+                                        valor_unitario = ${dadosFilme.valor_unitario}
+                                        
+                                        where id = ${dadosFilme.id}`
+        }
+
+            // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
+            // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
+            let result = await prisma.$executeRawUnsafe(sql)
+
+            console.log(result)
+
+            // validação para verificar se o insert funcionou no DB
+            if(result){
+                return true
+            } else {
+                return false
+            }
+
+    } catch (error) {
+        
+        return false
+
+    }
+
+}
 
 // excluir um filme existente filtrando pelo ID
 const deleteFilme = async (id) => {
@@ -91,7 +141,7 @@ const deleteFilme = async (id) => {
         let sql = `delete from tbl_filme where id = ${id}`
 
         // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsFilmes
-        let rsFilmes = await prisma.$queryRawUnsafe(sql)
+        let rsFilmes = await prisma.$executeRawUnsafe(sql)
         
         return rsFilmes
         

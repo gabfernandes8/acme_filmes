@@ -99,7 +99,33 @@ const setNovoFilme = async (dadosFilme, contentType) => {
 }
 
 //função para atualizar um filme existente
-const setAtualizarFilme = async () => { }
+const setAtualizarFilme = async (dadosFilme, contentType) => {
+
+    //Recebe o id da Tarefa e do Usuario
+    let dados = dadosFilme
+    let resultDadosFilme
+
+    //Validação para tratar campos obrigatórios e quantide de caracteres
+    if (dados.nome == '' || dados.nome == undefined || dados.nome.length > 80 ||
+        dados.sinopse == '' || dados.sinopse == undefined || dados.sinopse.length > 65535
+    ) {
+
+        return message.ERROR_REQUIRED_FIELDS // 400
+
+    } else {
+
+        //Envia os dados para a model inserir no BD
+        resultDadosTarefa = await tarefasDAO.updateTarefaById(usuario, tarefaId, tarefa)
+
+        //Valida se o BD inseriu corretamente os dados
+        if (resultDadosTarefa)
+            return message.UPDATED_ITEM // 200
+        else
+            return message.ERROR_INTERNAL_SERVER_DB // 500
+
+    }
+
+}
 
 // função para excluir um filme existente
 const setExcluirFilme = async (id) => {
@@ -107,13 +133,20 @@ const setExcluirFilme = async (id) => {
     try {
 
         let filme = id
+
+        let valFilme  = await getBuscarFilme(filme)
+
         let resultDadosFilme
 
         if (filme == '' || filme == undefined || isNaN(filme)) {
 
             return message.ERROR_INVALID_ID // 400
 
-        } else {
+        } else if(valFilme.status == false){
+
+            return message.ERROR_NOT_FOUND // 404
+
+        }else {
 
             //Envia os dados para a model inserir no BD
             resultDadosFilme = await filmesDAO.deleteFilme(filme)
@@ -122,7 +155,7 @@ const setExcluirFilme = async (id) => {
             if (resultDadosFilme)
                 return message.SUCCESS_DELETED_ITEM // 200
             else
-                return message.ERROR_INTERNAL_SERVER_DB // 500
+                return message.ERROR_INTERNAL_SERVER_DBA // 500
 
         }
         
