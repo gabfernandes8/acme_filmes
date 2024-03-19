@@ -7,10 +7,12 @@ module.exports = {
         "blue": "#4D6688",
         "maroon": "#BB0000",
         "gray": "#130000",
-        "grayclarinho": "#6D6D6D"
+        "grayclarinho": "#6D6D6D",
+        "blueclaro": "#7A8CA6"
       },
       fontFamily:{
         font: ["Irish Grover", "system-ui"],
+        fontP: ["Poppins", "system-ui"],
       }
     },
   },
