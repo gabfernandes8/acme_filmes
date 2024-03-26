@@ -8,7 +8,8 @@ module.exports = {
         "maroon": "#BB0000",
         "gray": "#130000",
         "grayclarinho": "#6D6D6D",
-        "blueclaro": "#7A8CA6"
+        "blueclaro": "#7A8CA6",
+        "cinza": "#3F3F3F"
       },
       fontFamily:{
         font: ["Irish Grover", "system-ui"],
