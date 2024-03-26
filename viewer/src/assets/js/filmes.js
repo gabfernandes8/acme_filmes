@@ -18,8 +18,8 @@ export const getFilmeById = async(id) => {
 
 }
 
-export const postFilme = async() => {
-    const url = `http://localhost:8080/v2/acme_filmes/filme/${id}`
+export const postFilme = async(filme) => {
+    const url = `http://localhost:8080/v2/acme_filmes/filme/`
     const options = {
         method: 'POST',
         headers: {
@@ -28,5 +28,6 @@ export const postFilme = async() => {
         body: JSON.stringify(filme)
     }
     const response = await fetch(url, options)
-    return response.ok
+    const data = await response.json()
+    return data
 }
