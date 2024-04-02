@@ -14,7 +14,7 @@
     <script src="../js/filmes.js" type="module" defer></script>
     <title>Adicionar filme</title>
 </head>
-<body class="font-font min-h-screen bg-[url('https://poltronadecinema.com.br/filmes/wp-content/uploads/2019/11/filmes-gratis-online-1024x576.jpg')] bg-cover bg-no-repeat">
+<body class="font-font min-h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/7ca5b7c7-20aa-42a8-a278-f801b0d65fa1/539c1d05-ea60-4865-88c5-be28fa1ac8b4/BR-pt-20240326-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-no-repeat">
     <div class="fixed inset-0  bg-black/80 -z-10"></div>
 
     <header class="p-8 flex">
@@ -53,9 +53,22 @@
                 </div>
                 <div class="flex flex-col w-full gap-2">
                     <label for="" class="text-2xl">
-                        Valor unitário:
+                        Gênero:
                     </label>
-                    <input type="number" class="bg-blue/75 rounded-lg h-12 p-4 text-black/70 focus:outline-none text-xl font-fontP">
+                    <select name="" id="" class="bg-blue/75 rounded-lg h-12 px-4 text-black/70 focus:outline-none text-xl font-fontP">
+                        <option value="" disabled selected> 
+                            Selecionar
+                        </option>
+                        <option value="romance"> 
+                            Romance
+                        </option>
+                        <option value="romance"> 
+                            Fantasia
+                        </option>
+                        <option value="romance"> 
+                            Animação
+                        </option>
+                    </select>
                 </div>
                 <div class="flex flex-col w-full gap-2">
                     <label for="" class="text-2xl">
@@ -75,9 +88,20 @@
                     </label>
                     <input type="date" class="bg-blue/75 rounded-lg h-12 p-4 text-black/70 focus:outline-none text-xl font-fontP">
                 </div>
-                <button class="bg-maroon h-14 w-32 rounded-lg text-white place-self-end self-center text-2xl font-fontP">
-                    Salvar
-                </button>
+
+                <div class="flex flex-col gap-5 place-self-end justify-end">
+                    <button class="bg-maroon h-14 w-32 rounded-lg text-white place-self-end text-2xl font-fontP">
+                        Salvar
+                    </button>
+                
+                    <button class="bg-maroon h-14 px-5 rounded-lg text-white place-self-end text-2xl font-fontP">
+                        
+                        <a href="./filmes_cadastrados.html" class="flex h-full w-full items-center justify-center">
+                            Ver filmes já cadastrados
+                        </a>
+                    </button>
+                </div>
+                
             </form>
         </div>
     </main>
