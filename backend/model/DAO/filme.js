@@ -26,7 +26,8 @@ const insertFilme = async (dadosFilme) => {
                                                 data_lancamento,
                                                 data_relancamento,
                                                 foto_capa,
-                                                valor_unitario
+                                                link_trailer,
+                                                classificacao_id
                                             )values (
                                                 '${dadosFilme.nome}',
                                                 '${dadosFilme.sinopse}',
@@ -34,7 +35,8 @@ const insertFilme = async (dadosFilme) => {
                                                 '${dadosFilme.data_lancamento}',
                                                 null,
                                                 '${dadosFilme.foto_capa}',
-                                                ${dadosFilme.valor_unitario}
+                                                '${dadosFilme.link_trailer}',
+                                                ${dadosFilme.classificacao_id}'
                                             )`
 
         } else {
@@ -45,7 +47,8 @@ const insertFilme = async (dadosFilme) => {
                                                 data_lancamento,
                                                 data_relancamento,
                                                 foto_capa,
-                                                valor_unitario
+                                                link_trailer,
+                                                classificacao_id
                                             )values (
                                                 '${dadosFilme.nome}',
                                                 '${dadosFilme.sinopse}',
@@ -53,7 +56,8 @@ const insertFilme = async (dadosFilme) => {
                                                 '${dadosFilme.data_lancamento}',
                                                 '${dadosFilme.data_relancamento}',
                                                 '${dadosFilme.foto_capa}',
-                                                ${dadosFilme.valor_unitario}
+                                                '${dadosFilme.link_trailer}',
+                                                ${dadosFilme.classificacao_id},
                                             )`
         }
 
@@ -92,7 +96,8 @@ const updateFilme = async (dadosFilme, id) => {
                                         data_lancamento = "${dadosFilme.data_lancamento}",
                                         data_lancamento = null,
                                         foto_capa = "${dadosFilme.foto_capa}",
-                                        valor_unitario = ${dadosFilme.valor_unitario}
+                                        link_trailer = "${dadosFilme.link_trailer}",
+                                        classificacao_id = "${dadosFilme.classificacao_id}"
                                         
                                         where id = ${id}`
         } else {
@@ -103,7 +108,8 @@ const updateFilme = async (dadosFilme, id) => {
                                         data_lancamento = "${dadosFilme.data_lancamento}",
                                         data_relancamento = "${dadosFilme.data_relancamento}",
                                         foto_capa = "${dadosFilme.foto_capa}",
-                                        valor_unitario = ${dadosFilme.valor_unitario}
+                                        link_trailer = "${dadosFilme.link_trailer}",
+                                        classificacao_id = "${dadosFilme.classificacao_id}"
                                         
                                         where id = ${id}`
         }

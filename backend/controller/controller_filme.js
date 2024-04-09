@@ -23,12 +23,13 @@ const setNovoFilme = async (dadosFilme, contentType) => {
             let resultDadosFilme = {}
 
             //Validação para verificar campos obrigatórios e conistência de dados
-            if (dadosFilme.nome == '' || dadosFilme.nome == undefined || dadosFilme.nome.length > 80 ||
-                dadosFilme.sinopse == '' || dadosFilme.sinopse == undefined || dadosFilme.sinopse.length > 65535 ||
-                dadosFilme.duracao == '' || dadosFilme.duracao == undefined || dadosFilme.duracao.length > 18 ||
-                dadosFilme.data_lancamento == '' || dadosFilme.data_lancamento == undefined || dadosFilme.data_lancamento.length > 10 ||
-                dadosFilme.foto_capa == '' || dadosFilme.foto_capa == undefined || dadosFilme.foto_capa.length > 200 ||
-                dadosFilme.valor_unitario.length > 200
+            if (dadosFilme.nome == ''              || dadosFilme.nome == undefined              || dadosFilme.nome.length > 80              ||
+                dadosFilme.sinopse == ''           || dadosFilme.sinopse == undefined           || dadosFilme.sinopse.length > 65535        ||
+                dadosFilme.duracao == ''           || dadosFilme.duracao == undefined           || dadosFilme.duracao.length > 18           ||
+                dadosFilme.data_lancamento == ''   || dadosFilme.data_lancamento == undefined   || dadosFilme.data_lancamento.length > 10   ||
+                dadosFilme.foto_capa == ''         || dadosFilme.foto_capa == undefined         || dadosFilme.foto_capa.length > 200        ||
+                dadosFilme.link_trailer == ''      || dadosFilme.link_trailer == undefined      || dadosFilme.link_trailer.length > 150     || 
+                dadosFilme.classificacao_id == ''  || dadosFilme.classificacao_id == undefined
             ) {
 
                 return message.ERROR_REQUIRED_FIELDS; // 400
@@ -118,7 +119,8 @@ const setAtualizarFilme = async (dadosFilme, contentType, id) => {
                 dadosFilme.duracao == '' || dadosFilme.duracao == undefined || dadosFilme.duracao.length > 18 ||
                 dadosFilme.data_lancamento == '' || dadosFilme.data_lancamento == undefined || dadosFilme.data_lancamento.length > 10 ||
                 dadosFilme.foto_capa == '' || dadosFilme.foto_capa == undefined || dadosFilme.foto_capa.length > 200 ||
-                dadosFilme.valor_unitario.length > 200
+                dadosFilme.link_trailer == ''      || dadosFilme.link_trailer == undefined      || dadosFilme.link_trailer.length > 150     || 
+                dadosFilme.classificacao_id == ''  || dadosFilme.classificacao_id == undefined
             ) {
 
                 return message.ERROR_REQUIRED_FIELDS; // 400

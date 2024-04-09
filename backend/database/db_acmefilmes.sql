@@ -2,6 +2,14 @@ create database db_acmefilmes_DS2A_B;
 
 use db_acmefilmes_DS2A_B;
 
+create table tbl_classificacao
+(
+	id integer primary key auto_increment not null,
+	sigla varchar(2) not null,
+    icone varchar(150) not null,
+    descricao varchar(150) not null
+);
+
 create table tbl_filme
 (
 	id integer primary key auto_increment not null,
@@ -11,78 +19,104 @@ create table tbl_filme
     data_lancamento date not null,
     data_relancamento date,
     foto_capa varchar(200) not null,
-    classificacao_id integer,
+    link_trailer varchar(150) not null,
+    
+    classificacao_id integer not null,
+    
     unique index (id),
     unique key (id),
     
     foreign key (classificacao_id) references tbl_classificacao(id)
 );
 
-create table tbl_atores
-(
-	id integer primary key auto_increment not null,
-    nome varchar(150),
-    data_nascimento date
-);
-
-create table tbl_diretores
-(
-	id integer primary key auto_increment not null,
-    nome varchar(150)
-);
-
 create table tbl_genero
 (
 	id integer primary key auto_increment not null,
-	nome varchar(50)
+	nome varchar(50) not null
 );
 
-create table tbl_classificacao
+create table tbl_filmes_genero
 (
 	id integer primary key auto_increment not null,
-	idade integer
+    genero_id integer not null,
+    filme_id integer not null,
+    
+    foreign key (genero_id) references tbl_genero(id),
+    foreign key (filme_id) references tbl_filme(id)
 );
 
-create table tbl_usuarios
+create table tbl_filmes_atores
 (
 	id integer primary key auto_increment not null,
-	nome varchar(200),
-    email varchar(100),
-    data_nascimento date,
-    senha varchar(10)
-);
-
-create table filmes_atores
-(
-	id integer primary key auto_increment not null,
-	filme_id integer,
-    ator_id integer,
+    filme_id integer not null,
+    ator_id integer not null,
     
     foreign key (filme_id) references tbl_filme(id),
     foreign key (ator_id) references tbl_atores(id)
 );
 
-create table filmes_genero
+create table tbl_sexo
 (
 	id integer primary key auto_increment not null,
-	filme_id integer,
-    genero_id integer,
-    
-    foreign key (filme_id) references tbl_filme(id),
-    foreign key (genero_id) references tbl_genero(id)
+    nome varchar(9) not null,
+    sigla varchar(1) not null
 );
 
-create table filme_diretor
+create table tbl_atores
 (
 	id integer primary key auto_increment not null,
-	filme_id integer,
-	diretor_id integer,
+    nome varchar(150) not null,
+    data_nascimento date not null,
+    data_falecimento date not null,
+    biografia varchar(255) not null,
+    sexo_id integer not null,
     
-    foreign key (filme_id) references tbl_filme(id),
+    foreign key (sexo_id) references tbl_sexo(id)
+);
+
+create table tbl_atores_nacionalidade
+(
+	id integer primary key auto_increment not null,
+    atores_id integer not null,
+    nacionalidade_id integer not null,
+    
+    foreign key (atores_id) references tbl_atores(id),
+    foreign key (nacionalidade_id) references tbl_nacionalidade(id)
+);
+
+create table tbl_nacionalidade
+(
+	id integer primary key auto_increment not null,
+    nome varchar(45) not null
+);
+
+create table tbl_diretores
+(
+	id integer primary key auto_increment not null,
+    nome varchar(150) not null
+);
+
+create table tbl_filmes_diretores 
+(
+	id integer primary key auto_increment not null,
+    filme_id integer,
+    diretor_id integer,
+    
+    foreign key (filme_id) references tbl_filme (id),
     foreign key (diretor_id) references tbl_diretores(id)
 );
 
+select * from tbl_filme;
+
 -- POST
+insert into tbl_classificacao(sigla, icone, descricao)values
+("L", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/DJCTQ_-_L.svg/75px-DJCTQ_-_L.svg.png", "História sem conteúdos potencialmente prejudiciais para qualquer faixa etária."),
+("10", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/DJCTQ_-_10.svg/75px-DJCTQ_-_10.svg.png", "História de conteúdo violento e linguagem imprópria de nível leve."),
+("12", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/DJCTQ_-_12.svg/75px-DJCTQ_-_12.svg.png", "Histórias com cenas de agressão física, insinuação de consumo de drogas e insinuação leve de sexo."),
+("14", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/DJCTQ_-_14.svg/75px-DJCTQ_-_14.svg.png", "Histórias com agressão física média, consumo de drogas explícito e insinuação de sexo moderada."),
+("16", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/DJCTQ_-_16.svg/75px-DJCTQ_-_16.svg.png", "Histórias com consumo de drogas explícito, agressão física acentuada e insinuação de sexo acentuada."),
+("18", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/DJCTQ_-_18.svg/75px-DJCTQ_-_18.svg.png", "Histórias com consumo e indução ao consumo de drogas, violência extrema, suicídio, cenas de sexo explícitas e distúrbios psicossomáticos.");
+
 insert into tbl_filme (nome, sinopse, duracao, data_lancamento, data_relancamento, foto_capa, valor_unitario)values
 ("Teen Beach Movie", 
 "Brady e McKenie são dois jovens surfistas que magicamente se tornam parte de um filme musical. Ao perceber que sua presença está alterando o roteiro original do filme, eles se esforçam para fazer tudo voltar ao normal e acabam se apaixonando.",
