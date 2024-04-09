@@ -106,7 +106,7 @@ create table tbl_filmes_diretores
     foreign key (diretor_id) references tbl_diretores(id)
 );
 
-select * from tbl_filme;
+select * from tbl_classificacao;
 
 -- POST
 insert into tbl_classificacao(sigla, icone, descricao)values
@@ -117,21 +117,10 @@ insert into tbl_classificacao(sigla, icone, descricao)values
 ("16", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/DJCTQ_-_16.svg/75px-DJCTQ_-_16.svg.png", "Histórias com consumo de drogas explícito, agressão física acentuada e insinuação de sexo acentuada."),
 ("18", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/DJCTQ_-_18.svg/75px-DJCTQ_-_18.svg.png", "Histórias com consumo e indução ao consumo de drogas, violência extrema, suicídio, cenas de sexo explícitas e distúrbios psicossomáticos.");
 
-insert into tbl_filme (nome, sinopse, duracao, data_lancamento, data_relancamento, foto_capa, valor_unitario)values
-("Teen Beach Movie", 
-"Brady e McKenie são dois jovens surfistas que magicamente se tornam parte de um filme musical. Ao perceber que sua presença está alterando o roteiro original do filme, eles se esforçam para fazer tudo voltar ao normal e acabam se apaixonando.",
-"01:50:00",
-"2013-07-19",
-null,
-"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTVhfbGTThTm0Cr1B9aiFGRkBALQzUFzJ1_Xl-d52MpfOTAaZQx",
-null),
-("Gente Grande",
-"A morte do treinador de basquete de infância de velhos amigos reúne a turma no mesmo lugar que celebraram um campeonato anos atrás. Os amigos, acompanhados de suas esposas e filhos, descobrem que idade não significa o mesmo que maturidade.",
-"01:42:00",
-"2010-09-24",
-null,
-"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS3KC5CYzKSIx0aKLEL-lYfeeF7lfTqcd4nVGWOwO2IZaBzfdaz",
-15.21);
+insert into tbl_diretores(nome) values
+("Steven Spielberg"),
+("Jon Watts"),
+("Greta Gerwig");
 
 -- GET
 select * from tbl_filme where nome like '%be%';

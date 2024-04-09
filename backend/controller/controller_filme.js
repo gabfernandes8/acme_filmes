@@ -304,11 +304,38 @@ const getFilmeByNome = async (nome) => {
     }
 }
 
+// função para buscar filmes filtrando pela classificacao
+const getFilmeByClassificacao = async (classificacao) => {
+    let filmesJSON = {}
+
+    let filtro = classificacao
+
+    if (filtro == '' || filtro == undefined) {
+        return message.ERROR_INVALID_PARAM //400
+    } else {
+
+        let dadosFilmes = await filmesDAO.selectByClassificacao(filtro)
+        if (dadosFilmes) {
+            if (dadosFilmes.length > 0) {
+                filmesJSON.filmes = dadosFilmes
+                filmesJSON.qt = dadosFilmes.length
+                filmesJSON.status_code = 200
+                return filmesJSON
+            } else {
+                return message.ERROR_NOT_FOUND //404
+            }
+        } else {
+            return message.ERROR_INTERNAL_SERVER_DBA // 500
+        }
+    }
+}
+
 module.exports = {
     setNovoFilme,
     setAtualizarFilme,
     setExcluirFilme,
     getListarFilmes,
     getBuscarFilme,
-    getFilmeByNome
+    getFilmeByNome,
+    getFilmeByClassificacao
 }

@@ -1,6 +1,6 @@
 /***************************************************************************************
-* Objetivo: criar a integração com o banco de dados MySQL para fazer o CRUD de filmes
-* Data: 30/01/2024
+* Objetivo: criar a integração com o banco de dados MySQL para fazer o CRUD de diretores
+* Data: 09/04/2024
 * Autor: Gabriela Fernandes
 * Versão: 1.0
 ***************************************************************************************/
@@ -11,55 +11,17 @@ const { PrismaClient } = require('@prisma/client')
 // instanciando o objeto prisma com as caracteristicas do prisma client
 const prisma = new PrismaClient
 
-// inserir um novo filme
-const insertFilme = async (dadosFilme) => {
+// inserir um novo diretor
+const insertDiretor = async (dadosDiretor) => {
     try {
 
         let sql
 
-        if(dadosFilme.data_relancamento == null || dadosFilme.data_relancamento == '' || dadosFilme.data_relancamento == undefined){
-
-            sql = `insert into tbl_filme (
-                                                nome, 
-                                                sinopse, 
-                                                duracao, 
-                                                data_lancamento,
-                                                data_relancamento,
-                                                foto_capa,
-                                                link_trailer,
-                                                classificacao_id
-                                            )values (
-                                                '${dadosFilme.nome}',
-                                                '${dadosFilme.sinopse}',
-                                                '${dadosFilme.duracao}',
-                                                '${dadosFilme.data_lancamento}',
-                                                null,
-                                                '${dadosFilme.foto_capa}',
-                                                '${dadosFilme.link_trailer}',
-                                                ${dadosFilme.classificacao_id}'
-                                            )`
-
-        } else {
-            sql = `insert into tbl_filme (
-                                                nome, 
-                                                sinopse, 
-                                                duracao, 
-                                                data_lancamento,
-                                                data_relancamento,
-                                                foto_capa,
-                                                link_trailer,
-                                                classificacao_id
-                                            )values (
-                                                '${dadosFilme.nome}',
-                                                '${dadosFilme.sinopse}',
-                                                '${dadosFilme.duracao}',
-                                                '${dadosFilme.data_lancamento}',
-                                                '${dadosFilme.data_relancamento}',
-                                                '${dadosFilme.foto_capa}',
-                                                '${dadosFilme.link_trailer}',
-                                                ${dadosFilme.classificacao_id},
-                                            )`
-        }
+        sql = `insert into tbl_diretores (
+                                            nome
+                                        )values (
+                                            '${dadosDiretor.nome}'
+                                        )`
 
     // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
     // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
@@ -80,39 +42,17 @@ const insertFilme = async (dadosFilme) => {
     }
 }
 
-// atualizar um filme existente filtrando pelo ID
-const updateFilme = async (dadosFilme, id) => {
+// atualizar um diretor existente filtrando pelo ID
+const updateDiretor = async (dadosDiretor, id) => {
     
     try {
 
         let sql
 
-        if(dadosFilme.data_relancamento == null || dadosFilme.data_relancamento == '' || dadosFilme.data_relancamento == undefined){
-
-            sql = `update tbl_filme set  
-                                        nome = "${dadosFilme.nome}",
-                                        sinopse = "${dadosFilme.sinopse}", 
-                                        duracao = "${dadosFilme.duracao}", 
-                                        data_lancamento = "${dadosFilme.data_lancamento}",
-                                        data_lancamento = null,
-                                        foto_capa = "${dadosFilme.foto_capa}",
-                                        link_trailer = "${dadosFilme.link_trailer}",
-                                        classificacao_id = "${dadosFilme.classificacao_id}"
-                                        
-                                        where id = ${id}`
-        } else {
-            sql = `update tbl_filme set  
-                                        nome = "${dadosFilme.nome}",
-                                        sinopse = "${dadosFilme.sinopse}", 
-                                        duracao = "${dadosFilme.duracao}", 
-                                        data_lancamento = "${dadosFilme.data_lancamento}",
-                                        data_relancamento = "${dadosFilme.data_relancamento}",
-                                        foto_capa = "${dadosFilme.foto_capa}",
-                                        link_trailer = "${dadosFilme.link_trailer}",
-                                        classificacao_id = "${dadosFilme.classificacao_id}"
-                                        
-                                        where id = ${id}`
-        }
+        sql = `update tbl_diretores set  
+                                    nome = "${dadosDiretor.nome}"
+                                    
+                                    where id = ${id}`
 
             // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
             // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
@@ -134,17 +74,17 @@ const updateFilme = async (dadosFilme, id) => {
 
 }
 
-// excluir um filme existente filtrando pelo ID
-const deleteFilme = async (id) => {
+// excluir um diretor existente filtrando pelo ID
+const deleteDiretor = async (id) => {
 
     try {
         
-        let sql = `delete from tbl_filme where id = ${id}`
+        let sql = `delete from tbl_diretores where id = ${id}`
 
-        // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsFilmes
-        let rsFilmes = await prisma.$executeRawUnsafe(sql)
+        // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsDiretor
+        let rsDiretor = await prisma.$executeRawUnsafe(sql)
         
-        return rsFilmes
+        return rsDiretor
         
     } catch (error) {
         
@@ -153,34 +93,34 @@ const deleteFilme = async (id) => {
 
 }
 
-// listar todos os filmes
-const selectAllFilmes = async () => {
+// listar todos os diretores
+const selectAllDiretores = async () => {
 
     try {
-        let sql = 'select * from tbl_filme order by id desc'
+        let sql = 'select * from tbl_diretores order by id desc'
     
         // $queryrawUnsafe(‘encaminha apenas a variavel’)
         // $queryRaw(‘codigo digitado aqui’)
     
-        // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsFilmes
-        let rsFilmes = await prisma.$queryRawUnsafe(sql)
-        return rsFilmes
+        // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsDiretores
+        let rsDiretor = await prisma.$queryRawUnsafe(sql)
+        return rsDiretor
     } catch (error) {
         return false
     }
 }
 
 // buscar o filme existente filtrando pelo ID
-const selectByIdFilme = async (id) => {
+const selectByIdDiretor = async (id) => {
 
     try {
 
         // realiza a busca do filme pelo id
-        let sql = `select * from tbl_filme where id=${id}`
+        let sql = `select * from tbl_diretores where id=${id}`
 
         // executa no DBA o script SQL
-        let rsFilmes = await prisma.$queryRawUnsafe(sql)
-        return rsFilmes
+        let rsDiretor = await prisma.$queryRawUnsafe(sql)
+        return rsDiretor
 
     } catch (error) {
         return false
@@ -190,26 +130,12 @@ const selectByIdFilme = async (id) => {
 const selectByNome = async (nome) => {
     
     try {
-        let sql = `select * from tbl_filme where nome like '%${nome}%'`
+        let sql = `select * from tbl_diretores where nome like '%${nome}%'`
     
-        // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsFilmes
-        let rsFilmes = await prisma.$queryRawUnsafe(sql)
+        // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsDiretor
+        let rsDiretor = await prisma.$queryRawUnsafe(sql)
 
-        return rsFilmes
-    } catch (error) {
-        return false
-    }
-}
-
-const selectByClassificacao = async (classificacao) => {
-    
-    try {
-        let sql = `select * from tbl_filme where classificacao_id where '${classificacao}%'`
-    
-        // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsFilmes
-        let rsFilmes = await prisma.$queryRawUnsafe(sql)
-
-        return rsFilmes
+        return rsDiretor
     } catch (error) {
         return false
     }
@@ -218,10 +144,10 @@ const selectByClassificacao = async (classificacao) => {
 const selectLastId = async () => {
     try {
 
-        let sql = 'select cast(last_insert_id() as DECIMAL) as id from tbl_filme limit 1' 
+        let sql = 'select cast(last_insert_id() as DECIMAL) as id from tbl_diretores limit 1' 
 
-        let rsFilmes = await prisma.$queryRawUnsafe(sql)
-        return rsFilmes
+        let rsDiretor = await prisma.$queryRawUnsafe(sql)
+        return rsDiretor
 
     } catch (error) {
 
@@ -231,12 +157,11 @@ const selectLastId = async () => {
 }
 
 module.exports = {
-    insertFilme,
-    updateFilme,
-    deleteFilme,
-    selectAllFilmes,
-    selectByIdFilme,
+    insertDiretor,
+    updateDiretor,
+    deleteDiretor,
+    selectAllDiretores,
+    selectByIdDiretor,
     selectByNome,
-    selectByClassificacao,
     selectLastId
 }
