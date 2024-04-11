@@ -58,8 +58,8 @@ create table tbl_filmes_atores
 create table tbl_sexo
 (
 	id integer primary key auto_increment not null,
-    nome varchar(9) not null,
-    sigla varchar(1) not null
+    nome varchar(15) not null,
+    sigla varchar(2) not null
 );
 
 create table tbl_atores
@@ -67,7 +67,7 @@ create table tbl_atores
 	id integer primary key auto_increment not null,
     nome varchar(150) not null,
     data_nascimento date not null,
-    data_falecimento date not null,
+    data_falecimento date,
     biografia varchar(255) not null,
     sexo_id integer not null,
     
@@ -106,7 +106,7 @@ create table tbl_filmes_diretores
     foreign key (diretor_id) references tbl_diretores(id)
 );
 
-select * from tbl_classificacao;
+select * from tbl_sexo;
 
 -- POST
 insert into tbl_classificacao(sigla, icone, descricao)values
@@ -121,6 +121,19 @@ insert into tbl_diretores(nome) values
 ("Steven Spielberg"),
 ("Jon Watts"),
 ("Greta Gerwig");
+
+insert into tbl_sexo(nome, sigla)values
+("Feminino", "F"),
+("Masculino", "M"),
+("Não-Binário", "NB");
+
+insert into tbl_sexo (
+                                            nome,
+                                            sigla
+                                        )values (
+                                            'Gênero Fluido',
+                                            'GF'
+                                        );
 
 -- GET
 select * from tbl_filme where nome like '%be%';
