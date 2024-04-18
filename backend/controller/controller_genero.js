@@ -223,7 +223,7 @@ const getGeneroByNome = async (nome) => {
         let dadosGenero = await generosDAO.selectByNome(filtro)
         if (dadosGenero) {
             if (dadosGenero.length > 0) {
-                generosJSON.nacionalidades = dadosGenero
+                generosJSON.generos = dadosGenero
                 generosJSON.qt = dadosGenero.length
                 generosJSON.status_code = 200
                 return generosJSON

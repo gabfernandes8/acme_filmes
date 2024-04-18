@@ -7,45 +7,45 @@
 ***************************************************************************************/
 
 // import do arquivo DAO para manipular dados do BD
-const classificacaoDAO = require('../model/DAO/genero.js')
+const classificacaoDAO = require('../model/DAO/classificacao.js')
 
 // import do arquivo de configuração do projeto
 const message = require('../modulo/config.js')
 
 // função para inserir uma nova nacionalidade no DBA
-const setNovoGenero = async (dadosGenero, contentType) => {
+const setNovaClassificacao = async (dadosClassificacao, contentType) => {
 
     try {
 
         if (String(contentType).toLowerCase() == 'application/json') {
 
             // cria a variável JSON
-            let resultDadosGenero = {}
+            let resultDadosClassificacao = {}
 
             //Validação para verificar campos obrigatórios e conistência de dados
-            if (dadosGenero.nome == '' || dadosGenero.nome == undefined || dadosGenero.nome.length > 45) {
+            if (dadosClassificacao.nome == '' || dadosClassificacao.nome == undefined || dadosClassificacao.nome.length > 45) {
 
                 return message.ERROR_REQUIRED_FIELDS // 400
 
             } else {
 
                     //envia os dados para o DAO inserir no BD
-                    let novoGenero = await classificacaoDAO.insertGenero(dadosGenero);
+                    let novaClassicacao = await classificacaoDAO.insertClassificacao(dadosClassificacao);
 
                     //validação para verificar se os dados foram inseridos pelo DAO no BD 
-                    if (novoGenero) {
+                    if (novaClassicacao) {
 
                         let id = await classificacaoDAO.selectLastId()
 
-                        dadosGenero.id = Number(id[0].id)
+                        dadosClassificacao.id = Number(id[0].id)
 
                         // cria o padrão de JSON para retorno dos dados criados no DB
-                        resultDadosGenero.status = message.SUCCESS_CREATED_ITEM.status
-                        resultDadosGenero.status_code = message.SUCCESS_CREATED_ITEM.status_code
-                        resultDadosGenero.message = message.SUCCESS_CREATED_ITEM.message
-                        resultDadosGenero.genero = dadosGenero
+                        resultDadosClassificacao.status = message.SUCCESS_CREATED_ITEM.status
+                        resultDadosClassificacao.status_code = message.SUCCESS_CREATED_ITEM.status_code
+                        resultDadosClassificacao.message = message.SUCCESS_CREATED_ITEM.message
+                        resultDadosClassificacao.classificacao = dadosClassificacao
 
-                        return resultDadosGenero
+                        return resultDadosClassificacao
 
                 }
 
@@ -65,41 +65,41 @@ const setNovoGenero = async (dadosGenero, contentType) => {
 }
 
 //função para atualizar uma nacionalidade existente
-const setAtualizarGenero = async (dadosGenero, contentType, id) => {
+const setAtualizarClassificacao = async (dadosClassificacao, contentType, id) => {
 
     
     try {
         
-        let genero = id
+        let classificacao = id
         
         if (String(contentType).toLowerCase() == 'application/json') {
 
             // cria a variável JSON
-            let resultDadosGenero = {}
+            let resultDadosClassificacao = {}
 
             //Validação para verificar campos obrigatórios e consistência de dados
-            if (genero == '' || genero == undefined || 
-                dadosGenero.nome == '' || dadosGenero.nome == undefined || dadosGenero.nome.length > 80) {
+            if (classificacao == '' || classificacao == undefined || 
+                dadosClassificacao.nome == '' || dadosClassificacao.nome == undefined || dadosClassificacao.nome.length > 80) {
 
                 return message.ERROR_REQUIRED_FIELDS; // 400
 
             } else {
 
                 //envia os dados para o DAO inserir no BD
-                let generoAtt = await classificacaoDAO.updateGenero(dadosGenero, genero);
+                let classificacaoAtt = await classificacaoDAO.updateClassificacao(dadosClassificacao, classificacao);
 
                 //validação para verificar se os dados foram inseridos pelo DAO no BD 
-                if (generoAtt) {
+                if (classificacaoAtt) {
                     
-                    dadosGenero.id = genero
+                    dadosClassificacao.id = classificacao
 
                     // cria o padrão de JSON para retorno dos dados criados no DB
-                    resultDadosGenero.status = message.SUCCESS_UPDATED_ITEM.status
-                    resultDadosGenero.status_code = message.SUCCESS_UPDATED_ITEM.status_code
-                    resultDadosGenero.message = message.SUCCESS_UPDATED_ITEM.message
-                    resultDadosGenero.genero = dadosGenero
+                    resultDadosClassificacao.status = message.SUCCESS_UPDATED_ITEM.status
+                    resultDadosClassificacao.status_code = message.SUCCESS_UPDATED_ITEM.status_code
+                    resultDadosClassificacao.message = message.SUCCESS_UPDATED_ITEM.message
+                    resultDadosClassificacao.classificacao = dadosClassificacao
 
-                    return resultDadosGenero
+                    return resultDadosClassificacao
 
                 } else {
 
@@ -123,31 +123,31 @@ const setAtualizarGenero = async (dadosGenero, contentType, id) => {
 }
 
 // função para excluir uma nacionalidade existente
-const setExcluirGenero = async (id) => {
+const setExcluirClassificacao = async (id) => {
 
     try {
 
-        let genero = id
+        let classificacao = id
 
-        let valGenero  = await getBuscarGenero(genero)
+        let valClassificacao  = await getBuscarClassificacao(classificacao)
 
-        let resultDadosGenero
+        let resultDadosClassificacao
 
-        if (genero == '' || genero == undefined || isNaN(genero)) {
+        if (classificacao == '' || classificacao == undefined || isNaN(classificacao)) {
 
             return message.ERROR_INVALID_ID // 400
 
-        } else if(valGenero.status == false){
+        } else if(valClassificacao.status == false){
 
             return message.ERROR_NOT_FOUND // 404
 
         }else {
 
             //Envia os dados para a model inserir no BD
-            resultDadosGenero = await classificacaoDAO.deleteGenero(genero)
+            resultDadosClassificacao = await classificacaoDAO.deleteClassificacao(classificacao)
 
             //Valida se o BD inseriu corretamente os dados
-            if (resultDadosGenero)
+            if (resultDadosClassificacao)
                 return message.SUCCESS_DELETED_ITEM // 200
             else
                 return message.ERROR_INTERNAL_SERVER_DBA // 500
@@ -160,17 +160,17 @@ const setExcluirGenero = async (id) => {
 }
 
 // função para listar todas as nacionalidade existentes no DBA
-const getListarGeneros = async () => {
-    let generosJSON = {}
+const getListarClassificacao = async () => {
+    let classificacaoJSON = {}
 
-    let dadosGeneros = await classificacaoDAO.selectAllGeneros()
+    let dadosClassificacoes = await classificacaoDAO.selectAllClassificacao()
 
-    if (dadosGeneros) {
-        if (dadosGeneros.length > 0) {
-            generosJSON.generos = dadosGeneros
-            generosJSON.qt = dadosGeneros.length
-            generosJSON.status_code = 200
-            return generosJSON
+    if (dadosClassificacoes) {
+        if (dadosClassificacoes.length > 0) {
+            classificacaoJSON.classificacoes = dadosClassificacoes
+            classificacaoJSON.qt = dadosClassificacoes.length
+            classificacaoJSON.status_code = 200
+            return classificacaoJSON
         } else {
             return message.ERROR_NOT_FOUND
         }
@@ -182,24 +182,24 @@ const getListarGeneros = async () => {
 }
 
 // função para buscar uma nacionalidade pelo ID
-const getBuscarGenero = async (id) => {
-    // recebe o id da GegetBuscarGenero
-    let idGenero = id;
-    let generoJSON = {}
+const getBuscarClassificacao = async (id) => {
+    // recebe o id da GegetBuscarClassificacao
+    let idClassificacao = id;
+    let classificacaoJSON = {}
 
     // validação para ID vazio, indefinido ou não numérico
-    if (idGenero == '' || idGenero == undefined || isNaN(idGenero)) {
+    if (idClassificacao == '' || idClassificacao == undefined || isNaN(idClassificacao)) {
         return message.ERROR_INVALID_ID //400
     } else {
-        let dadosGenero = await classificacaoDAO.selectByIdGenero(idGenero)
+        let dadosGenero = await classificacaoDAO.selectByIdClassificacao(idClassificacao)
 
-        if (dadosGenero) {
+        if (dadosClassificacao) {
             // validação para verificar se existem dados de retorno
-            if (dadosGenero.length > 0) {
+            if (dadosClassificacao.length > 0) {
                 // diva 🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺
-                generoJSON.genero = dadosGenero
-                generoJSON.status_code = 200
-                return generoJSON
+                classificacaoJSON.classificacao = dadosClassificacao
+                classificacaoJSON.status_code = 200
+                return classificacaoJSON
             } else {
                 return message.ERROR_NOT_FOUND //404
             }
@@ -211,8 +211,8 @@ const getBuscarGenero = async (id) => {
 }
 
 // função para buscar uma nacionalidade filtrando pelo nome
-const getGeneroByNome = async (nome) => {
-    let generosJSON = {}
+const getClassificacaoByNome = async (nome) => {
+    let classificacoesJSON = {}
 
     let filtro = nome
 
@@ -220,13 +220,13 @@ const getGeneroByNome = async (nome) => {
         return message.ERROR_INVALID_PARAM //400
     } else {
 
-        let dadosGenero = await classificacaoDAO.selectByNome(filtro)
-        if (dadosGenero) {
-            if (dadosGenero.length > 0) {
-                generosJSON.nacionalidades = dadosGenero
-                generosJSON.qt = dadosGenero.length
-                generosJSON.status_code = 200
-                return generosJSON
+        let dadosClassificacao = await classificacaoDAO.selectByNome(filtro)
+        if (dadosClassificacao) {
+            if (dadosClassificacao.length > 0) {
+                classificacoesJSON.classificacoes = dadosGenero
+                classificacoesJSON.qt = dadosGenero.length
+                classificacoesJSON.status_code = 200
+                return classificacoesJSON
             } else {
                 return message.ERROR_NOT_FOUND //404
             }
@@ -237,10 +237,10 @@ const getGeneroByNome = async (nome) => {
 }
 
 module.exports = {
-    setNovoGenero,
-    setAtualizarGenero,
-    setExcluirGenero,
-    getListarGeneros,
-    getBuscarGenero,
-    getGeneroByNome
+    setNovaClassificacao,
+    setAtualizarClassificacao,
+    setExcluirClassificacao,
+    getListarClassificacoes,
+    getBuscarClassificacao,
+    getClassificacaoByNome
 }
