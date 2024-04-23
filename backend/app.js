@@ -43,7 +43,10 @@ app.use((request, response, next) => {
     const controllerFilmes = require('./controller/controller_filme.js')
     const controllerDiretores = require('./controller/controller_diretores.js')
     const controllerNacionalidade = require('./controller/controller_nacionalidade.js')
+    const controllerSexo = require('./controller/controller_sexo.js')
     const controllerGenero = require('./controller/controller_genero.js')
+    const controllerClassificacao = require('./controller/controller_classificacao.js')
+    const controllerAtores = require('./controller/controller_atores.js')
 /*******************************************************************************/
 
 /************************** ENDPOINTS DE FILMES *********************************/
@@ -345,7 +348,7 @@ app.put('/v2/acme_filmes/nacionalidade/:id', cors(), bodyParserJSON, async(reque
 app.get('/v2/acme_filmes/gender', cors(), async(request, response, next) => {
 
     // chama a função para retornar os dados do genero
-    let dadosGender = await controllerGenero.getListarGenders()
+    let dadosGender = await controllerSexo.getListarGenders()
 
     response.status(dadosGender.status_code)
     response.json(dadosGender)
@@ -357,7 +360,7 @@ app.get('/v2/acme_filmes/genders/filtro', cors(), async(request, response, next)
     let filtro = request.query.nome
     
     // chama a função para retornar os dados do diretor
-    let dadosGenero = await controllerGenero.getGenderByNome(filtro)
+    let dadosGenero = await controllerSexo.getGenderByNome(filtro)
 
     response.status(dadosGenero.status_code)
     response.json(dadosGenero)
@@ -368,7 +371,7 @@ app.get('/v2/acme_filmes/gender/:id', cors(), async(request, response, next) => 
     // recebe o id da requisição do gender
     let idGender = request.params.id
 
-    let dadosGender = await controllerGenero.getBuscarGender(idGender)
+    let dadosGender = await controllerSexo.getBuscarGender(idGender)
 
     response.status(dadosGender.status_code)
     response.json(dadosGender)
@@ -386,7 +389,7 @@ app.post('/v2/acme_filmes/gender', cors(), bodyParserJSON, async(request, respon
     let dadosBody = request.body
 
     // encaminha os dados da requisição para a controller enviar para o BD
-    let resultDados = await controllerGenero.setNovoGender(dadosBody, contentType)
+    let resultDados = await controllerSexo.setNovoGender(dadosBody, contentType)
     
     response.status(resultDados.status_code)
     response.json(resultDados)
@@ -398,7 +401,7 @@ app.delete('/v2/acme_filmes/gender/:id', cors(), async(request, response, next) 
 
     let gender = request.params.id
 
-    let dadosGender = await controllerGenero.setExcluirGender(gender)
+    let dadosGender = await controllerSexo.setExcluirGender(gender)
 
     response.status(dadosGender.status_code)
     response.json(dadosGender)
@@ -417,7 +420,7 @@ app.put('/v2/acme_filmes/gender/:id', cors(), bodyParserJSON, async(request, res
     let dadosBody = request.body
 
     // encaminha os dados da requisição para a controller enviar para o BD
-    let resultDados = await controllerGenero.setAtualizarGender(dadosBody, contentType, gender)
+    let resultDados = await controllerSexo.setAtualizarGender(dadosBody, contentType, gender)
     
     response.status(resultDados.status_code)
     response.json(resultDados)
@@ -514,7 +517,184 @@ app.put('/v2/acme_filmes/genero/:id', cors(), bodyParserJSON, async(request, res
 
 
 })
+/*******************************************************************************/
 
+
+
+/*************************** ENDPOINTS DE CLASSIFICAÇÃO  ********************************/
+
+// endpoint: listar as classificações
+app.get('/v2/acme_filmes/classificacao', cors(), async(request, response, next) => {
+
+    // chama a função para retornar os dados da classificacao
+    let dadosClassificacoes = await controllerClassificacao.getListarClassificacoes()
+
+    response.status(dadosClassificacoes.status_code)
+    response.json(dadosClassificacoes)
+})
+
+// endpoint: listar a classificacao filtrando pelo nome
+app.get('/v2/acme_filmes/classificacao/filtro', cors(), async(request, response, next) => {
+
+    let filtro = request.query.nome
+    
+    // chama a função para retornar os dados da classificacao
+    let dadosClassificacao = await controllerClassificacao.getClassificacaoByNome(filtro)
+
+    response.status(dadosClassificacao.status_code)
+    response.json(dadosClassificacao)
+})
+
+// endpoint: retorna os dados da classificacao, filtrando pelo ID
+app.get('/v2/acme_filmes/classificacao/:id', cors(), async(request, response, next) => {
+    // recebe o id da requisição da classificacao
+    let idClassificacao = request.params.id
+
+    let dadosClassificacao = await controllerClassificacao.getBuscarClassificacao(idClassificacao)
+
+    response.status(dadosClassificacao.status_code)
+    response.json(dadosClassificacao)
+})
+
+// endpoint: inserir novas classificacoes no Banco de Dados
+    // não esquecer de colocar o bodyParserJSON que é quem define o formato de chegada dos dados
+    // obs: esse objeto foi criado no início do projeto
+app.post('/v2/acme_filmes/classificacao', cors(), bodyParserJSON, async(request, response, next) => {
+
+    // recebe o content type da requisição (A API deve receber somente application/json)
+    let contentType = request.headers['content-type']
+
+    //recebe os dados encaminhados na requisição no body(JSON)
+    let dadosBody = request.body
+
+    // encaminha os dados da requisição para a controller enviar para o BD
+    let resultDados = await controllerClassificacao.setNovaClassificacao(dadosBody, contentType)
+    
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+
+})
+
+// endpoint: excluir uma classificacao pelo id
+app.delete('/v2/acme_filmes/classificacao/:id', cors(), async(request, response, next) => {
+
+    let classificacao = request.params.id
+
+    let dadosClassificacao = await controllerClassificacao.setExcluirClassificacao(classificacao)
+
+    response.status(dadosClassificacao.status_code)
+    response.json(dadosClassificacao)
+
+})
+
+// endpoint: atualizar classificacao
+app.put('/v2/acme_filmes/classificacao/:id', cors(), bodyParserJSON, async(request, response, next) => {
+
+    let classificacao = request.params.id
+
+    // recebe o content type da requisição (A API deve receber somente application/json)
+    let contentType = request.headers['content-type']
+
+    //recebe os dados encaminhados na requisição no body(JSON)
+    let dadosBody = request.body
+
+    // encaminha os dados da requisição para a controller enviar para o BD
+    let resultDados = await controllerClassificacao.setAtualizarClassificacao(dadosBody, contentType, classificacao)
+    
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+
+
+})
+/*******************************************************************************/
+
+
+
+/*************************** ENDPOINTS DE ATORES  ********************************/
+
+// endpoint: listar os atores
+app.get('/v2/acme_filmes/atores', cors(), async(request, response, next) => {
+
+    // chama a função para retornar os dados da classificacao
+    let dadosAtores = await controllerAtores.getListarAtores()
+
+    response.status(dadosAtores.status_code)
+    response.json(dadosAtores)
+})
+
+// endpoint: listar o ator filtrando pelo nome
+app.get('/v2/acme_filmes/ator/filtro', cors(), async(request, response, next) => {
+
+    let filtro = request.query.nome
+    
+    // chama a função para retornar os dados da classificacao
+    let dadosAtor = await controllerAtores.getAtorByNome(filtro)
+
+    response.status(dadosAtor.status_code)
+    response.json(dadosAtor)
+})
+
+// endpoint: retorna os dados do ator, filtrando pelo ID
+app.get('/v2/acme_filmes/ator/:id', cors(), async(request, response, next) => {
+    // recebe o id da requisição do ator
+    let idAtor = request.params.id
+
+    let dadosAtor = await controllerAtores.getBuscarAtor(idAtor)
+
+    response.status(dadosAtor.status_code)
+    response.json(dadosAtor)
+})
+
+// endpoint: inserir novas classificacoes no Banco de Dados
+    // não esquecer de colocar o bodyParserJSON que é quem define o formato de chegada dos dados
+    // obs: esse objeto foi criado no início do projeto
+app.post('/v2/acme_filmes/ator', cors(), bodyParserJSON, async(request, response, next) => {
+
+    // recebe o content type da requisição (A API deve receber somente application/json)
+    let contentType = request.headers['content-type']
+
+    //recebe os dados encaminhados na requisição no body(JSON)
+    let dadosBody = request.body
+
+    // encaminha os dados da requisição para a controller enviar para o BD
+    let resultDados = await controllerAtores.setNovoAtor(dadosBody, contentType)
+    
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+
+})
+
+// endpoint: excluir um ator pelo id
+app.delete('/v2/acme_filmes/ator/:id', cors(), async(request, response, next) => {
+
+    let ator = request.params.id
+
+    let dadosAtor = await controllerAtores.setExcluirAtor(ator)
+
+    response.status(dadosAtor.status_code)
+    response.json(dadosAtor)
+
+})
+
+// endpoint: atualizar ator
+app.put('/v2/acme_filmes/ator/:id', cors(), bodyParserJSON, async(request, response, next) => {
+
+    let ator = request.params.id
+
+    // recebe o content type da requisição (A API deve receber somente application/json)
+    let contentType = request.headers['content-type']
+
+    //recebe os dados encaminhados na requisição no body(JSON)
+    let dadosBody = request.body
+
+    // encaminha os dados da requisição para a controller enviar para o BD
+    let resultDados = await controllerAtores.setAtualizarAtor(dadosBody, contentType, ator)
+    
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+
+
+})
 /*******************************************************************************/
 
 app.listen(8080, () => {})

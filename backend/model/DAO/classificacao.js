@@ -22,21 +22,22 @@ const insertClassificacao = async (dadosClassificacao) => {
                                             icone,
                                             descricao
                                         )values (
-                                            '${dadosGenero.sigla}'
-                                            '${dadosGenero.icone}'
-                                            '${dadosGenero.descricao}'
+                                            '${dadosClassificacao.sigla}',
+                                            '${dadosClassificacao.icone}',
+                                            '${dadosClassificacao.descricao}'
                                         )`
 
     // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
     // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
     let result = await prisma.$executeRawUnsafe(sql)
-
+    
     // validação para verificar se o insert funcionou no DB
     if(result){
         return true
     } else {
         return false
     }
+
     
     
 } catch (error) {
@@ -136,7 +137,7 @@ const selectByIdClassificacao = async (id) => {
 const selectByNome = async (nome) => {
     
     try {
-        let sql = `select * from tbl_classificacao where nome like '%${nome}%'`
+        let sql = `select * from tbl_classificacao where descricao like '%${nome}%' OR sigla like '%${nome}'`
     
         // executa o scriptSQL no BD e recebe o retorno dos dados na variável rsNacionalidade
         let rsClassificacao = await prisma.$queryRawUnsafe(sql)
@@ -163,11 +164,11 @@ const selectLastId = async () => {
 }
 
 module.exports = {
-    insertGenero,
-    updateGenero,
-    deleteGenero,
-    selectAllGeneros,
-    selectByIdGenero,
+    insertClassificacao,
+    updateClassificacao,
+    deleteClassificacao,
+    selectAllClassificacao,
+    selectByIdClassificacao,
     selectByNome,
     selectLastId
 }

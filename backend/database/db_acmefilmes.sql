@@ -68,7 +68,7 @@ create table tbl_atores
     nome varchar(150) not null,
     data_nascimento date not null,
     data_falecimento date,
-    biografia varchar(255) not null,
+    biografia text not null,
     sexo_id integer not null,
     
     foreign key (sexo_id) references tbl_sexo(id)
@@ -106,7 +106,18 @@ create table tbl_filmes_diretores
     foreign key (diretor_id) references tbl_diretores(id)
 );
 
-select * from tbl_sexo;
+
+DELIMITER $
+create trigger tgr_del_ator
+	before delete on tbl_atores
+		for each row
+        begin 
+			delete from tbl_atores_nacionalidade WHERE atores_id = old.id;
+			delete from tbl_filmes_atores WHERE ator_id = old.id;
+        end $
+DELIMITER ;
+
+select * from tbl_diretores;
 
 -- POST
 insert into tbl_classificacao(sigla, icone, descricao)values
@@ -122,22 +133,25 @@ insert into tbl_diretores(nome) values
 ("Jon Watts"),
 ("Greta Gerwig");
 
-insert into tbl_sexo(nome, sigla)values
-("Feminino", "F"),
-("Masculino", "M"),
-("Não-Binário", "NB");
-
-insert into tbl_sexo (
+insert into tbl_atores (
                                             nome,
-                                            sigla
+                                            data_nascimento,
+                                            data_falecimento,
+                                            biografia,
+                                            sexo_id
                                         )values (
-                                            'Gênero Fluido',
-                                            'GF'
+                                            'Margot Robbie',
+                                            '1990-07-02',
+                                            null,
+-                                           'Margot Elise Robbie é uma atriz e produtora australiana, indicada a dois Óscares, quatro Globos de Ouro e cinco BAFTAs. Em 2017, a revista Time a nomeou uma das 100 pessoas mais influentes do mundo, e, em 2019, foi classificada entre as atrizes mais bem pagas do mundo pela Forbes.',     
+											3
                                         );
 
 -- GET
 select * from tbl_filme where nome like '%be%';
 select * from tbl_filme;
+
+select * from tbl_diretores where nome like '%g%';
 
 -- DELETE
 delete from tbl_filme where id = 1;

@@ -23,7 +23,10 @@ const setNovaClassificacao = async (dadosClassificacao, contentType) => {
             let resultDadosClassificacao = {}
 
             //Validação para verificar campos obrigatórios e conistência de dados
-            if (dadosClassificacao.nome == '' || dadosClassificacao.nome == undefined || dadosClassificacao.nome.length > 45) {
+            if (dadosClassificacao.sigla == ''     || dadosClassificacao.sigla == undefined     || dadosClassificacao.sigla.length > 2      ||
+                dadosClassificacao.icone == ''     || dadosClassificacao.icone == undefined     || dadosClassificacao.icone.length > 150    ||
+                dadosClassificacao.descricao == '' || dadosClassificacao.descricao == undefined || dadosClassificacao.descricao.length > 150
+            ) {
 
                 return message.ERROR_REQUIRED_FIELDS // 400
 
@@ -78,8 +81,11 @@ const setAtualizarClassificacao = async (dadosClassificacao, contentType, id) =>
             let resultDadosClassificacao = {}
 
             //Validação para verificar campos obrigatórios e consistência de dados
-            if (classificacao == '' || classificacao == undefined || 
-                dadosClassificacao.nome == '' || dadosClassificacao.nome == undefined || dadosClassificacao.nome.length > 80) {
+            if (classificacao == ''                || classificacao == undefined            || 
+                dadosClassificacao.sigla == ''     || dadosClassificacao.sigla == undefined     || dadosClassificacao.sigla.length > 2      ||
+                dadosClassificacao.icone == ''     || dadosClassificacao.icone == undefined     || dadosClassificacao.icone.length > 150    ||
+                dadosClassificacao.descricao == '' || dadosClassificacao.descricao == undefined || dadosClassificacao.descricao.length > 150
+            ) {
 
                 return message.ERROR_REQUIRED_FIELDS; // 400
 
@@ -160,7 +166,7 @@ const setExcluirClassificacao = async (id) => {
 }
 
 // função para listar todas as nacionalidade existentes no DBA
-const getListarClassificacao = async () => {
+const getListarClassificacoes = async () => {
     let classificacaoJSON = {}
 
     let dadosClassificacoes = await classificacaoDAO.selectAllClassificacao()
@@ -191,7 +197,7 @@ const getBuscarClassificacao = async (id) => {
     if (idClassificacao == '' || idClassificacao == undefined || isNaN(idClassificacao)) {
         return message.ERROR_INVALID_ID //400
     } else {
-        let dadosGenero = await classificacaoDAO.selectByIdClassificacao(idClassificacao)
+        let dadosClassificacao = await classificacaoDAO.selectByIdClassificacao(idClassificacao)
 
         if (dadosClassificacao) {
             // validação para verificar se existem dados de retorno
@@ -223,8 +229,8 @@ const getClassificacaoByNome = async (nome) => {
         let dadosClassificacao = await classificacaoDAO.selectByNome(filtro)
         if (dadosClassificacao) {
             if (dadosClassificacao.length > 0) {
-                classificacoesJSON.classificacoes = dadosGenero
-                classificacoesJSON.qt = dadosGenero.length
+                classificacoesJSON.classificacoes = dadosClassificacao
+                classificacoesJSON.qt = dadosClassificacao.length
                 classificacoesJSON.status_code = 200
                 return classificacoesJSON
             } else {

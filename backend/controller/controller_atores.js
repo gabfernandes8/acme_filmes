@@ -1,18 +1,19 @@
 /***************************************************************************************
 * Objetivo: arquivo responsável pela interação entre o app e a model, que teremos todas
 * as tratativas e a regra de negócio para o CRUD de atores
-* Data: 11/04/2024
+* Data: 23/04/2024
 * Autor: Gabriela Fernandes
 * Versão: 1.0
 ***************************************************************************************/
 
 // import do arquivo DAO para manipular dados do BD
 const atoresDAO = require('../model/DAO/ator.js')
+const controllerSexo = require('./controller_sexo.js')
 
 // import do arquivo de configuração do projeto
 const message = require('../modulo/config.js')
 
-// função para inserir um novo ator no DBA
+// post: função para inserir um novo ator no DBA
 const setNovoAtor = async (dadosAtor, contentType) => {
 
     try {
@@ -21,21 +22,37 @@ const setNovoAtor = async (dadosAtor, contentType) => {
 
             // cria a variável JSON
             let resultDadosAtor = {}
+            let validacaoSexo = await controllerSexo.getBuscarGender(dadosAtor.sexo_id) 
 
             //Validação para verificar campos obrigatórios e conistência de dados
-            if (dadosAtor.nome == '' || dadosAtor.nome == undefined || dadosAtor.nome.length > 150) {
+            if (dadosAtor.nome == ''             || dadosAtor.nome == undefined              || dadosAtor.nome.length > 150       ||
+                dadosAtor.data_nascimento == ''  || dadosAtor.data_nascimento == undefined   ||
+                dadosAtor.biografia == ''        || dadosAtor.biografia == undefined         || dadosAtor.biografia.length > 65535 ||
+                dadosAtor.sexo_id == ''          || dadosAtor.sexo_id == undefined           || validacaoSexo.status_code == false
+            ) {
 
                 return message.ERROR_REQUIRED_FIELDS // 400
 
             } else {
 
+                if(
+                    dadosAtor.data_falecimento != null      &&
+                    dadosAtor.data_falecimento != ''        &&
+                    dadosAtor.data_falecimento != undefined &&
+                    dadosAtor.data_falecimento.length != 10
+                ){
+
+                    return message.ERROR_REQUIRED_FIELDS
+
+                }
+
                     //envia os dados para o DAO inserir no BD
-                    let novoAtor = await AtoresDAO.insertAtor(dadosAtor);
+                    let novoAtor = await atoresDAO.insertAtor(dadosAtor);
 
                     //validação para verificar se os dados foram inseridos pelo DAO no BD 
                     if (novoAtor) {
 
-                        let id = await AtoresDAO.selectLastId()
+                        let id = await atoresDAO.selectLastId()
 
                         dadosAtor.id = Number(id[0].id)
 
@@ -46,6 +63,7 @@ const setNovoAtor = async (dadosAtor, contentType) => {
                         resultDadosAtor.ator = dadosAtor
 
                         return resultDadosAtor
+
                 }
 
             }
@@ -63,8 +81,9 @@ const setNovoAtor = async (dadosAtor, contentType) => {
 
 }
 
-//função para atualizar um ator existente
-const setAtualizarAtor = async (dadosDiretor, contentType, id) => {
+// put: função para atualizar um ator existente
+const setAtualizarAtor = async (dadosAtor, contentType, id) => {
+
     
     try {
         
@@ -76,34 +95,49 @@ const setAtualizarAtor = async (dadosDiretor, contentType, id) => {
             let resultDadosAtor = {}
 
             //Validação para verificar campos obrigatórios e consistência de dados
-            if (ator == '' || ator == undefined || 
-                dadosAtor.nome == '' || dadosAtor.nome == undefined || dadosAtor.nome.length > 150) {
+            if (ator == ''                       || ator == undefined                        || 
+                dadosAtor.data_nascimento == ''  || dadosAtor.data_nascimento == undefined   ||
+                dadosAtor.data_falecimento == '' || dadosAtor.data_falecimento == undefined  ||
+                dadosAtor.biografia == ''        || dadosAtor.biografia == undefined         || dadosAtor.biografia.length > 255 ||
+                dadosAtor.sexo_id == ''          || dadosAtor.sexo_id == undefined
+            ) {
 
-                return message.ERROR_REQUIRED_FIELDS // 400
+                return message.ERROR_REQUIRED_FIELDS; // 400
 
             } else {
 
-                    //envia os dados para o DAO inserir no BD
-                    let diretorAtt = await diretoresDAO.updateDiretor(dadosDiretor, diretor);
+                if(
+                    dadosAtor.data_falecimento != null      &&
+                    dadosAtor.data_falecimento != ''        &&
+                    dadosAtor.data_falecimento != undefined &&
+                    dadosAtor.data_falecimento.length != 10
+                ){
 
-                    //validação para verificar se os dados foram inseridos pelo DAO no BD 
-                    if (diretorAtt) {
-                        
-                        dadosDiretor.id = diretor
+                    return message.ERROR_REQUIRED_FIELDS
+                    
+                }
 
-                        // cria o padrão de JSON para retorno dos dados criados no DB
-                        resultDadosDiretor.status = message.SUCCESS_UPDATED_ITEM.status
-                        resultDadosDiretor.status_code = message.SUCCESS_UPDATED_ITEM.status_code
-                        resultDadosDiretor.message = message.SUCCESS_UPDATED_ITEM.message
-                        resultDadosDiretor.diretor = dadosDiretor
+                //envia os dados para o DAO inserir no BD
+                let atorAtt = await atoresDAO.updateAtor(dadosAtor, ator);
 
-                        return resultDadosDiretor
+                //validação para verificar se os dados foram inseridos pelo DAO no BD 
+                if (atorAtt) {
+                    
+                    dadosAtor.id = ator
 
-                    } else {
+                    // cria o padrão de JSON para retorno dos dados criados no DB
+                    resultDadosAtor.status = message.SUCCESS_UPDATED_ITEM.status
+                    resultDadosAtor.status_code = message.SUCCESS_UPDATED_ITEM.status_code
+                    resultDadosAtor.message = message.SUCCESS_UPDATED_ITEM.message
+                    resultDadosAtor.ator = dadosAtor
 
-                        return message.ERROR_INTERNAL_SERVER_DBA // 500
+                    return resultDadosAtor
 
-                    }
+                } else {
+
+                    return message.ERROR_INTERNAL_SERVER_DBA // 500
+
+                }
 
             }
 
@@ -120,32 +154,32 @@ const setAtualizarAtor = async (dadosDiretor, contentType, id) => {
 
 }
 
-// função para excluir um diretor existente
-const setExcluirDiretor = async (id) => {
+// delete: função para excluir um ator existente
+const setExcluirAtor = async (id) => {
 
     try {
 
-        let diretor = id
+        let ator = id
 
-        let valDiretor  = await getBuscarDiretor(diretor)
+        let valAtor  = await getBuscarAtor(ator)
 
-        let resultDadosDiretor
+        let resultDadosAtor
 
-        if (diretor == '' || diretor == undefined || isNaN(diretor)) {
+        if (ator == '' || ator == undefined || isNaN(ator)) {
 
             return message.ERROR_INVALID_ID // 400
 
-        } else if(valDiretor.status == false){
+        } else if(valAtor.status == false){
 
             return message.ERROR_NOT_FOUND // 404
 
         }else {
 
             //Envia os dados para a model inserir no BD
-            resultDadosDiretor = await diretoresDAO.deleteDiretor(diretor)
+            resultDadosAtor = await atoresDAO.deleteAtor(ator)
 
             //Valida se o BD inseriu corretamente os dados
-            if (resultDadosDiretor)
+            if (resultDadosAtor)
                 return message.SUCCESS_DELETED_ITEM // 200
             else
                 return message.ERROR_INTERNAL_SERVER_DBA // 500
@@ -157,18 +191,18 @@ const setExcluirDiretor = async (id) => {
     }
 }
 
-// função para listar todos os diretores existentes no DBA
-const getListarDiretores = async () => {
-    let diretoresJSON = {}
+// get: função para listar todas os atores existentes no DBA
+const getListarAtores = async () => {
+    let atoresJSON = {}
 
-    let dadosDiretores = await diretoresDAO.selectAllDiretores()
+    let dadosAtores = await atoresDAO.selectAllAtores()
 
-    if (dadosDiretores) {
-        if (dadosDiretores.length > 0) {
-            diretoresJSON.diretores = dadosDiretores
-            diretoresJSON.qt = dadosDiretores.length
-            diretoresJSON.status_code = 200
-            return diretoresJSON
+    if (dadosAtores) {
+        if (dadosAtores.length > 0) {
+            atoresJSON.atores = dadosAtores
+            atoresJSON.qt = dadosAtores.length
+            atoresJSON.status_code = 200
+            return atoresJSON
         } else {
             return message.ERROR_NOT_FOUND
         }
@@ -179,25 +213,25 @@ const getListarDiretores = async () => {
 
 }
 
-// função para buscar um diretores pelo ID
-const getBuscarDiretor = async (id) => {
-    // recebe o id do diretor
-    let idDiretor = id
-    let diretorJSON = {}
+// get: função para buscar um ator pelo ID
+const getBuscarAtor = async (id) => {
+    // recebe o id da GegetBuscarClassificacao
+    let idAtor = id;
+    let atoresJSON = {}
 
     // validação para ID vazio, indefinido ou não numérico
-    if (idDiretor == '' || idDiretor == undefined || isNaN(idDiretor)) {
+    if (idAtor == '' || idAtor == undefined || isNaN(idAtor)) {
         return message.ERROR_INVALID_ID //400
     } else {
-        let dadosDiretor = await diretoresDAO.selectByIdDiretor(idDiretor)
+        let dadosAtor = await atoresDAO.selectByIdAtor(idAtor)
 
-        if (dadosDiretor) {
+        if (dadosAtor) {
             // validação para verificar se existem dados de retorno
-            if (dadosDiretor.length > 0) {
+            if (dadosAtor.length > 0) {
                 // diva 🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺
-                diretorJSON.diretor = dadosDiretor
-                diretorJSON.status_code = 200
-                return diretorJSON
+                atoresJSON.classificacao = dadosAtor
+                atoresJSON.status_code = 200
+                return atoresJSON
             } else {
                 return message.ERROR_NOT_FOUND //404
             }
@@ -208,9 +242,9 @@ const getBuscarDiretor = async (id) => {
     }
 }
 
-// função para buscar um diretor filtrando pelo nome
-const getDiretorByNome = async (nome) => {
-    let diretoresJSON = {}
+// get: função para buscar um ator filtrando pelo nome
+const getAtorByNome = async (nome) => {
+    let atoresJSON = {}
 
     let filtro = nome
 
@@ -218,13 +252,13 @@ const getDiretorByNome = async (nome) => {
         return message.ERROR_INVALID_PARAM //400
     } else {
 
-        let dadosDiretores = await diretoresDAO.selectByNome(filtro)
-        if (dadosDiretores) {
-            if (dadosDiretores.length > 0) {
-                diretoresJSON.diretores = dadosDiretores
-                diretoresJSON.qt = dadosDiretores.length
-                diretoresJSON.status_code = 200
-                return diretoresJSON
+        let dadosAtor = await atoresDAO.selectByNome(filtro)
+        if (dadosAtor) {
+            if (dadosAtor.length > 0) {
+                atoresJSON.classificacoes = dadosAtor
+                atoresJSON.qt = dadosAtor.length
+                atoresJSON.status_code = 200
+                return atoresJSON
             } else {
                 return message.ERROR_NOT_FOUND //404
             }
@@ -234,37 +268,11 @@ const getDiretorByNome = async (nome) => {
     }
 }
 
-// função para buscar um diretor filtrando pelo nome
-// const getFilmeByDiretor = async (nome) => {
-//     let diretorJSON = {}
-
-//     let filtro = nome
-
-//     if (filtro == '' || filtro == undefined) {
-//         return message.ERROR_INVALID_PARAM //400
-//     } else {
-
-//         let dadosDiretores = await diretoresDAO.selectByNome(filtro)
-//         if (dadosDiretores) {
-//             if (dadosDiretores.length > 0) {
-//                 diretoresJSON.diretores = dadosFilmes
-//                 diretoresJSON.qt = dadosDiretores.length
-//                 diretoresJSON.status_code = 200
-//                 return diretoresJSON
-//             } else {
-//                 return message.ERROR_NOT_FOUND //404
-//             }
-//         } else {
-//             return message.ERROR_INTERNAL_SERVER_DBA // 500
-//         }
-//     }
-// }
-
 module.exports = {
-    setNovoDiretor,
-    setAtualizarDiretor,
-    setExcluirDiretor,
-    getListarDiretores,
-    getBuscarDiretor,
-    getDiretorByNome
+    setNovoAtor,
+    setAtualizarAtor,
+    setExcluirAtor,
+    getListarAtores,
+    getBuscarAtor,
+    getAtorByNome
 }

@@ -25,7 +25,6 @@ const insertGender = async (dadosGender) => {
                                             '${dadosGender.sigla}'
                                         )`
 
-
     // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
     // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
     let result = await prisma.$executeRawUnsafe(sql)
