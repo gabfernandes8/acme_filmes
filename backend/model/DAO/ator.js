@@ -28,7 +28,7 @@ const insertAtor = async (dadosAtor) => {
                                             '${dadosAtor.nome}',
                                             '${dadosAtor.data_nascimento}',
                                             null,
--                                            '${dadosAtor.biografia}',
+                                            '${dadosAtor.biografia}',
                                             ${dadosAtor.sexo_id}
                                         )`
 
@@ -83,7 +83,7 @@ const updateAtor = async (dadosAtor, id) => {
                                         data_nascimento = "${dadosAtor.data_nascimento}",
                                         data_falecimento = null,
                                         biografia = "${dadosAtor.biografia}",
-                                        sexo_id = "${dadosAtor.sexo_id}",
+                                        sexo_id = "${dadosAtor.sexo_id}"
                                     
                                         where id = ${id}`
         } else {
@@ -93,7 +93,7 @@ const updateAtor = async (dadosAtor, id) => {
                                         data_nascimento = "${dadosAtor.data_nascimento}",
                                         data_falecimento = "${dadosAtor.data_falecimento}",
                                         biografia = "${dadosAtor.biografia}",
-                                        sexo_id = "${dadosAtor.sexo_id}",
+                                        sexo_id = "${dadosAtor.sexo_id}"
                                     
                                         where id = ${id}`
             

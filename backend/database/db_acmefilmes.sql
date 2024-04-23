@@ -133,6 +133,8 @@ insert into tbl_diretores(nome) values
 ("Jon Watts"),
 ("Greta Gerwig");
 
+desc tbl_atores;
+
 insert into tbl_atores (
                                             nome,
                                             data_nascimento,
@@ -143,13 +145,23 @@ insert into tbl_atores (
                                             'Margot Robbie',
                                             '1990-07-02',
                                             null,
--                                           'Margot Elise Robbie é uma atriz e produtora australiana, indicada a dois Óscares, quatro Globos de Ouro e cinco BAFTAs. Em 2017, a revista Time a nomeou uma das 100 pessoas mais influentes do mundo, e, em 2019, foi classificada entre as atrizes mais bem pagas do mundo pela Forbes.',     
+-                                           'xcvxcvxcv',
 											3
                                         );
-
+                                        
+                                        
+delete from tbl_atores where id > 0;
+alter table tbl_atores 
+	drop column biografia;
+    
+alter table tbl_atores
+	add column biografia text;
+                                        
+                                        select * from tbl_atores;
 -- GET
 select * from tbl_filme where nome like '%be%';
 select * from tbl_filme;
+select * from tbl_atores;
 
 select * from tbl_diretores where nome like '%g%';
 

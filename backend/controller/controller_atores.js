@@ -93,13 +93,13 @@ const setAtualizarAtor = async (dadosAtor, contentType, id) => {
 
             // cria a variável JSON
             let resultDadosAtor = {}
+            let validacaoSexo = await controllerSexo.getBuscarGender(dadosAtor.sexo_id) 
 
-            //Validação para verificar campos obrigatórios e consistência de dados
             if (ator == ''                       || ator == undefined                        || 
+                dadosAtor.nome == ''             || dadosAtor.nome == undefined              || dadosAtor.nome.length > 150        ||
                 dadosAtor.data_nascimento == ''  || dadosAtor.data_nascimento == undefined   ||
-                dadosAtor.data_falecimento == '' || dadosAtor.data_falecimento == undefined  ||
-                dadosAtor.biografia == ''        || dadosAtor.biografia == undefined         || dadosAtor.biografia.length > 255 ||
-                dadosAtor.sexo_id == ''          || dadosAtor.sexo_id == undefined
+                dadosAtor.biografia == ''        || dadosAtor.biografia == undefined         || dadosAtor.biografia.length > 65535 ||
+                dadosAtor.sexo_id == ''          || dadosAtor.sexo_id == undefined           || validacaoSexo.status_code == false
             ) {
 
                 return message.ERROR_REQUIRED_FIELDS; // 400
@@ -112,11 +112,12 @@ const setAtualizarAtor = async (dadosAtor, contentType, id) => {
                     dadosAtor.data_falecimento != undefined &&
                     dadosAtor.data_falecimento.length != 10
                 ){
-
+            
                     return message.ERROR_REQUIRED_FIELDS
                     
                 }
 
+                
                 //envia os dados para o DAO inserir no BD
                 let atorAtt = await atoresDAO.updateAtor(dadosAtor, ator);
 
@@ -199,6 +200,17 @@ const getListarAtores = async () => {
 
     if (dadosAtores) {
         if (dadosAtores.length > 0) {
+            const promisse = dadosAtores.map(async(ator) => {
+
+                let sexo = await controllerSexo.getBuscarGender(ator.sexo_id)
+
+                if(sexo.status_code == 200){
+                    ator.sexo = sexo.gender 
+                }
+            })
+
+            await Promise.all(promisse)
+
             atoresJSON.atores = dadosAtores
             atoresJSON.qt = dadosAtores.length
             atoresJSON.status_code = 200
