@@ -729,24 +729,8 @@ video {
   grid-template-columns: 25vw 1fr;
 }
 
-.grid-rows-\[20vh_1fr\] {
-  grid-template-rows: 20vh 1fr;
-}
-
-.grid-rows-\[2000vh_1fr\] {
-  grid-template-rows: 2000vh 1fr;
-}
-
-.grid-rows-\[200vh_1fr\] {
-  grid-template-rows: 200vh 1fr;
-}
-
 .grid-rows-\[10vh_1fr\] {
   grid-template-rows: 10vh 1fr;
-}
-
-.grid-rows-\[15vh_1fr\] {
-  grid-template-rows: 15vh 1fr;
 }
 
 .flex-col {
