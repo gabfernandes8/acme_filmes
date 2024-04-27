@@ -14,20 +14,41 @@
     <script src="../js/filmes.js" type="module" defer></script>
     <title>Adicionar filme</title>
 </head>
-<body class="font-font min-h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/7ca5b7c7-20aa-42a8-a278-f801b0d65fa1/539c1d05-ea60-4865-88c5-be28fa1ac8b4/BR-pt-20240326-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-no-repeat">
+<body class="grid grid-cols-[25vw_1fr] font-font min-h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/7ca5b7c7-20aa-42a8-a278-f801b0d65fa1/539c1d05-ea60-4865-88c5-be28fa1ac8b4/BR-pt-20240326-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-no-repeat sticky">
     <div class="fixed inset-0  bg-black/80 -z-10"></div>
 
-    <header class="p-8 flex">
-        <a href="../pages/home.html" class="flex gap-5 w-full">
-            <img src="../img/seta.svg" alt="" class="h-6 self-center">
-            <span class="text-white self-center text-lg">VOLTAR PARA O MENU PRINCIPAL</span>
-        </a>
+    <!-- <header class="p-8">
         <div class="flex justify-end items-end h-15 w-full">
             <img src="../img/acme-filmes-logo 1.png" alt="" >
         </div>
-    </header>
+    </header> -->
     
-    <main class="flex flex-col items-center">
+    <main class="">
+        <div class="bg-blue w-full h-full">
+            <div class="p-8">
+                <a href="../pages/home.html" class="flex gap-5 w-full">
+                <img src="../img/seta.svg" alt="" class="h-6 self-center">
+                <span class="text-white self-center text-base">VOLTAR PARA O MENU PRINCIPAL</span>
+            </a>
+            </div>
+            
+            <div class="h-full flex flex-col items-center justify-evenly">
+                <h2 class="text-4xl text-white">MENU</h2>
+                <span class="text-2xl text-white">
+                    Filmes
+                </span>
+                <span class="text-2xl text-white">
+                    Atores
+                </span>
+                <span class="text-2xl text-white">
+                    Diretores
+                </span>
+                <span class="text-2xl text-white">
+                    Gênero
+                </span>
+            </div>
+        </div>
+
         <div class="flex w-screen justify-center p-5">
             <span class="text-white font-font text-4xl">Adicionar filme</span>
         </div>
@@ -104,6 +125,7 @@
                 
             </form>
         </div>
+
     </main>
 </body>
 </html>
