@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/acme-filmes-logo 1.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../output.css">
+    <script src="../js/filmes.js" type="module" defer></script>
+    <title>Adicionar gênero</title>
+</head>
+<body class="grid grid-cols-[25vw_1fr] font-font min-h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/7ca5b7c7-20aa-42a8-a278-f801b0d65fa1/539c1d05-ea60-4865-88c5-be28fa1ac8b4/BR-pt-20240326-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-no-repeat sticky">
+    <nav class="bg-blue h-screen">
+        <div class="py-7 px-6">
+            <a href="../pages/home.html" class="flex gap-5 w-full">
+            <img src="../img/seta.svg" alt="" class="h-6 self-center">
+            <span class="text-white self-center text-base">VOLTAR PARA O MENU PRINCIPAL</span>
+        </a>
+        </div>
+        
+        <div class="h-full flex flex-col items-center gap-16">
+            <h2 class="text-3xl text-white p-5">MENU</h2>
+            <a href="./cms_filme.html">
+                <span class="text-xl text-white hover:cursor-pointer hover:underline hover:text-maroon">
+                    Filmes
+                </span>
+            </a>
+            <a href="./cms_atores.html">
+                <span class="text-xl text-white hover:cursor-pointer hover:underline hover:text-maroon">
+                    Atores
+                </span>
+            </a>
+            
+            <a href="./cms_diretores.html">
+                <span class="text-xl text-white hover:cursor-pointer hover:underline hover:text-maroon">
+                    Diretores
+                </span>
+            </a>
+            <a href="./cms_genero.html">
+                <span class="text-xl text-white hover:cursor-pointer hover:underline hover:text-maroon">
+                    Gêneros
+                </span>
+            </a>
+        </div>
+    </nav>
+    <div class="fixed inset-0  bg-black/80 -z-10"></div>
+    
+    <main class="flex flex-col w-full justify-center items-center">
+        <div class="flex w-full justify-center p-5">
+            <span class="text-white font-font text-4xl">Adicionar gênero</span>
+        </div>
+        <div class="grid bg-white h-32 w-[120vh] px-8 rounded-3xl">
+            <form action="" class="grid h-full py-6 gap-6">
+                <div class="flex w-full gap-2">
+                    <label for="" class="text-xl">
+                        Nome:
+                    </label>
+                    <input type="text" class="bg-blue/75 rounded-lg h-9 w-full p-4 text-black/70 focus:outline-none text-lg font-fontP">
+                </div>
+
+                <div class="flex gap-5 place-self-center justify-center">
+                    <button class="bg-maroon h-9 w-32 rounded-lg text-white place-self-end text-lg font-fontP">
+                        Salvar
+                    </button>
+                
+                    <button class="bg-maroon h-9 px-5 rounded-lg text-white place-self-end text-lg font-fontP">
+                        
+                        <a href="./generos_cadastrados.html" class="flex h-full w-full items-center justify-center">
+                            Ver gêneros já cadastrados
+                        </a>
+                    </button>
+                </div>
+                
+            </form>
+        </div>
+
+    </main>
+</body>
+</html>

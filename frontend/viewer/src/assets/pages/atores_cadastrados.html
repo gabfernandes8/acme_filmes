@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/acme-filmes-logo 1.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../output.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/filmes.js" type="module" defer></script>
+    <title>Atores cadastrados</title>
+</head>
+<body class="font-font min-h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/7ca5b7c7-20aa-42a8-a278-f801b0d65fa1/539c1d05-ea60-4865-88c5-be28fa1ac8b4/BR-pt-20240326-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-no-repeat">
+    <div class="fixed inset-0  bg-black/80 -z-10"></div>
+
+    <header class="p-8 flex">
+        <a href="./cms_atores.html" class="flex gap-5 w-full">
+            <img src="../img/seta.svg" alt="" class="h-6 self-center">
+            <span class="text-white self-center text-lg">VOLTAR</span>
+        </a>
+        <div class="flex justify-end items-end h-15 w-full">
+            <img src="../img/acme-filmes-logo 1.png" alt="" >
+        </div>
+    </header>
+    
+    <main class="flex flex-col items-center">
+        <div class="flex w-screen justify-center p-5">
+            <span class="text-white font-font text-2xl">Atores já cadastrados</span>
+        </div>
+        <div class="bg-white h-[64vh] w-[120vh] rounded-3xl overflow-hidden">
+            <div class="barra-rolagem h-full w-full overflow-auto flex scroll-smooth">
+                <table class="w-full border-4 border-white m-2 relative">
+                    <tr class="text-xl sticky -top-1 h-[5vh] bg-white">
+                        <th class="font-light border border-gray w-[20%] text-start px-2">Nome</th>
+                        <th class="font-light border border-gray w-[15%] text-start px-2">Biografia</th>
+                        <th class="font-light border border-gray w-[10%] text-center">Nacionalidade</th>
+                        <th class="font-light border border-gray w-[15%] text-center">Nascimento</th>
+                        <th class="font-light border border-gray w-[20%] text-start px-2">Falecimento</th>
+                        <th class="font-light border border-gray w-[10%] text-center">Gênero</th>
+                        <th class="opacity-0">aaaaaa</th>
+                    </tr>
+                    <tr>
+                        <td class="font-fontP text-xs border border-gray text-start px-2">Margot Robbie</td>
+                        <td class="font-fontP text-xs border border-gray text-start px-2">Margot Elise Robbie é uma...</td>
+                        <td class="font-fontP text-xs border border-gray text-start px-2">Australiano</td>
+                        <td class="font-fontP text-xs border border-gray text-start px-2">02/07/1990</td>
+                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
+                        <td class="font-fontP text-xs border border-gray text-start px-2">F</td>
+                        <td class="border border-gray text-center">
+                            <div class="w-full h-full gap-2 flex justify-center items-center">
+                            <button>
+                                <img src="../img/x.png" class="h-4/5 pl-2">
+                            </button>
+                            <button>
+                                <a href="" class="h-full w-full flex items-center justify-center">
+                                    <img src="../img/editar.png" class="size-7">
+                                </a>
+                            </button>
+                            </div>
+                            
+                        </td>
+                    </tr>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

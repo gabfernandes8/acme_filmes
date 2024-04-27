@@ -15,68 +15,67 @@
     <title>Adicionar filme</title>
 </head>
 <body class="grid grid-cols-[25vw_1fr] font-font min-h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/7ca5b7c7-20aa-42a8-a278-f801b0d65fa1/539c1d05-ea60-4865-88c5-be28fa1ac8b4/BR-pt-20240326-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-no-repeat sticky">
-    <div class="fixed inset-0  bg-black/80 -z-10"></div>
-
-    <!-- <header class="p-8">
-        <div class="flex justify-end items-end h-15 w-full">
-            <img src="../img/acme-filmes-logo 1.png" alt="" >
+    <nav class="bg-blue h-screen">
+        <div class="py-7 px-6">
+            <a href="../pages/home.html" class="flex gap-5 w-full">
+            <img src="../img/seta.svg" alt="" class="h-6 self-center">
+            <span class="text-white self-center text-base">VOLTAR PARA O MENU PRINCIPAL</span>
+        </a>
         </div>
-    </header> -->
-    
-    <main class="">
-        <div class="bg-blue w-full h-full">
-            <div class="p-8">
-                <a href="../pages/home.html" class="flex gap-5 w-full">
-                <img src="../img/seta.svg" alt="" class="h-6 self-center">
-                <span class="text-white self-center text-base">VOLTAR PARA O MENU PRINCIPAL</span>
-            </a>
-            </div>
-            
-            <div class="h-full flex flex-col items-center justify-evenly">
-                <h2 class="text-4xl text-white">MENU</h2>
-                <span class="text-2xl text-white">
-                    Filmes
-                </span>
-                <span class="text-2xl text-white">
+        
+        <div class="h-full flex flex-col items-center gap-16">
+            <h2 class="text-3xl text-white p-5">MENU</h2>
+            <span class="text-xl text-white hover:cursor-pointer hover:underline hover:text-maroon">
+                Filmes
+            </span>
+            <a href="./cms_atores.html">
+                <span class="text-xl text-white hover:cursor-pointer hover:underline hover:text-maroon">
                     Atores
                 </span>
-                <span class="text-2xl text-white">
+            </a>
+            
+            <a href="./cms_diretores.html">
+                <span class="text-xl text-white hover:cursor-pointer hover:underline hover:text-maroon">
                     Diretores
                 </span>
-                <span class="text-2xl text-white">
-                    Gênero
+            </a>
+            <a href="./cms_genero.html">
+                <span class="text-xl text-white hover:cursor-pointer hover:underline hover:text-maroon">
+                    Gêneros
                 </span>
-            </div>
-        </div>
-
-        <div class="flex w-screen justify-center p-5">
+            </a>
+    </nav>
+    <div class="fixed inset-0  bg-black/80 -z-10"></div>
+    
+    <main class="flex flex-col w-full justify-center items-center">
+        <div class="flex w-full justify-center p-5">
             <span class="text-white font-font text-4xl">Adicionar filme</span>
         </div>
-        <div class="bg-white h-[64vh] w-[120vh] px-8 rounded-3xl">
+        <div class="grid bg-white h-[70vh] w-[120vh] px-8 rounded-3xl">
             <form action="" class="grid grid-cols-2 h-full py-6 gap-6">
                 <div class="flex flex-col w-full gap-2">
-                    <label for="" class="text-2xl">
+                    <label for="" class="text-xl">
                         Nome:
                     </label>
-                    <input type="text" class="bg-blue/75 rounded-lg h-12 p-4 text-black/70 focus:outline-none text-xl font-fontP">
+                    <input type="text" class="bg-blue/75 rounded-lg h-9 p-4 text-black/70 focus:outline-none text-lg font-fontP">
                 </div>
                 <div class="flex flex-col w-full gap-2">
-                    <label for="date" class="text-2xl">
+                    <label for="date" class="text-xl">
                         Data de relançamento (se houver):
                     </label>
-                    <input type="date" class="bg-blue/75 rounded-lg h-12 p-4 text-black/70 focus:outline-none text-xl font-fontP">
+                    <input type="date" class="bg-blue/75 rounded-lg h-9 p-4 text-black/70 focus:outline-none text-lg font-fontP">
                 </div>
                 <div class="flex flex-col w-full gap-2">
-                    <label for="" class="text-2xl">
+                    <label for="" class="text-xl">
                         Sinopse:
                     </label>
-                    <input type="text" class="bg-blue/75 rounded-lg h-12 p-4 text-black/70 focus:outline-none text-xl font-fontP">
+                    <input type="text" class="bg-blue/75 rounded-lg h-9 p-4 text-black/70 focus:outline-none text-lg font-fontP">
                 </div>
                 <div class="flex flex-col w-full gap-2">
-                    <label for="" class="text-2xl">
+                    <label for="" class="text-xl">
                         Gênero:
                     </label>
-                    <select name="" id="" class="bg-blue/75 rounded-lg h-12 px-4 text-black/70 focus:outline-none text-xl font-fontP">
+                    <select name="" id="" class="bg-blue/75 rounded-lg h-9 px-4 text-black/70 focus:outline-none text-lg font-fontP">
                         <option value="" disabled selected> 
                             Selecionar
                         </option>
@@ -92,30 +91,30 @@
                     </select>
                 </div>
                 <div class="flex flex-col w-full gap-2">
-                    <label for="" class="text-2xl">
+                    <label for="" class="text-xl">
                         Duração:
                     </label>
-                    <input type="time" class="bg-blue/75 rounded-lg h-12 p-4 text-black/70 focus:outline-none text-xl font-fontP">
+                    <input type="time" class="bg-blue/75 rounded-lg h-9 p-4 text-black/70 focus:outline-none text-lg font-fontP">
                 </div>
                 <div class="flex flex-col w-full gap-2">
-                    <label for="" class="text-2xl">
+                    <label for="" class="text-xl">
                         Capa:
                     </label>
-                    <input type="url" class="bg-blue/75 rounded-lg h-12 p-4 text-black/70 focus:outline-none text-xl font-fontP">
+                    <input type="url" class="bg-blue/75 rounded-lg h-9 p-4 text-black/70 focus:outline-none text-lg font-fontP">
                 </div>
                 <div class="flex flex-col w-full gap-2">
-                    <label for="" class="text-2xl">
+                    <label for="" class="text-xl">
                         Data de lançamento:
                     </label>
-                    <input type="date" class="bg-blue/75 rounded-lg h-12 p-4 text-black/70 focus:outline-none text-xl font-fontP">
+                    <input type="date" class="bg-blue/75 rounded-lg h-9 p-4 text-black/70 focus:outline-none text-lg font-fontP">
                 </div>
 
                 <div class="flex flex-col gap-5 place-self-end justify-end">
-                    <button class="bg-maroon h-14 w-32 rounded-lg text-white place-self-end text-2xl font-fontP">
+                    <button class="bg-maroon h-9 w-32 rounded-lg text-white place-self-end text-lg font-fontP">
                         Salvar
                     </button>
                 
-                    <button class="bg-maroon h-14 px-5 rounded-lg text-white place-self-end text-2xl font-fontP">
+                    <button class="bg-maroon h-9 px-5 rounded-lg text-white place-self-end text-lg font-fontP">
                         
                         <a href="./filmes_cadastrados.html" class="flex h-full w-full items-center justify-center">
                             Ver filmes já cadastrados
