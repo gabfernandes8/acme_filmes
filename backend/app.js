@@ -49,6 +49,8 @@ app.use((request, response, next) => {
     const controllerAtores = require('./controller/controller_atores.js')
 /*******************************************************************************/
 
+// #region FILMES
+
 /************************** ENDPOINTS DE FILMES *********************************/
 
 // endpoints: listar os filmes da ACME
@@ -163,7 +165,7 @@ app.put('/v2/acme_filmes/filme/:id', cors(), bodyParserJSON, async(request, resp
 })
 /*******************************************************************************/
 
-
+// #region DIRETORES
 
 /************************** ENDPOINTS DE DIRETORES ******************************/
 
@@ -251,6 +253,7 @@ app.put('/v2/acme_filmes/diretor/:id', cors(), bodyParserJSON, async(request, re
 })
 /********************************************************************************/
 
+// #region NACIONALIDADE
 
 
 /*************************** ENDPOINTS DE NACIONALIDADE  ********************************/
@@ -341,6 +344,8 @@ app.put('/v2/acme_filmes/nacionalidade/:id', cors(), bodyParserJSON, async(reque
 
 /********************************************************************************/
 
+// #region SEXO
+
 
 /*************************** ENDPOINTS DE SEXO  ********************************/
 
@@ -430,7 +435,7 @@ app.put('/v2/acme_filmes/gender/:id', cors(), bodyParserJSON, async(request, res
 
 /*******************************************************************************/
 
-
+// #region GENERO
 
 /*************************** ENDPOINTS DE GENERO  ********************************/
 
@@ -519,7 +524,7 @@ app.put('/v2/acme_filmes/genero/:id', cors(), bodyParserJSON, async(request, res
 })
 /*******************************************************************************/
 
-
+// #region CLASSIFICACAO
 
 /*************************** ENDPOINTS DE CLASSIFICAÇÃO  ********************************/
 
@@ -608,7 +613,7 @@ app.put('/v2/acme_filmes/classificacao/:id', cors(), bodyParserJSON, async(reque
 })
 /*******************************************************************************/
 
-
+// #region ATORES       
 
 /*************************** ENDPOINTS DE ATORES  ********************************/
 

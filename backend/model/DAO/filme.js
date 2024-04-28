@@ -36,7 +36,7 @@ const insertFilme = async (dadosFilme) => {
                                                 null,
                                                 '${dadosFilme.foto_capa}',
                                                 '${dadosFilme.link_trailer}',
-                                                ${dadosFilme.classificacao_id}'
+                                                ${dadosFilme.classificacao_id}
                                             )`
 
         } else {
@@ -57,9 +57,11 @@ const insertFilme = async (dadosFilme) => {
                                                 '${dadosFilme.data_relancamento}',
                                                 '${dadosFilme.foto_capa}',
                                                 '${dadosFilme.link_trailer}',
-                                                ${dadosFilme.classificacao_id},
+                                                ${dadosFilme.classificacao_id}
                                             )`
         }
+
+        console.log(sql)
 
     // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
     // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
@@ -157,7 +159,7 @@ const deleteFilme = async (id) => {
 const selectAllFilmes = async () => {
 
     try {
-        let sql = 'select * from tbl_filme order by id desc'
+        let sql = 'select id, nome, sinopse, date_format(data_lancamento, "%Y-%m-%d") as data_lancamento, date_format(data_relancamento, "%Y-%m-%d") as data_relancamento, time_format(duracao, "%H:%i") as duracao, foto_capa, link_trailer, classificacao_id from tbl_filme order by nome asc'
     
         // $queryrawUnsafe(‘encaminha apenas a variavel’)
         // $queryRaw(‘codigo digitado aqui’)
@@ -176,7 +178,7 @@ const selectByIdFilme = async (id) => {
     try {
 
         // realiza a busca do filme pelo id
-        let sql = `select * from tbl_filme where id=${id}`
+        let sql = `select id, nome, sinopse, date_format(data_lancamento, "%Y-%m-%d") as data_lancamento, date_format(data_relancamento, "%Y-%m-%d") as data_relancamento, time_format(duracao, "%H:%i") as duracao, foto_capa, link_trailer, classificacao_id from tbl_filme where id=${id}`
 
         // executa no DBA o script SQL
         let rsFilmes = await prisma.$queryRawUnsafe(sql)
