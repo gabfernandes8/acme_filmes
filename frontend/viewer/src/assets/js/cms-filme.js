@@ -82,6 +82,17 @@ const cadastrarFilme = () => {
             padding: '0 0 28px 0',
             heightAuto: false,
         })
+    } else {
+        Swal.fire({
+            timer: 2000,
+            title: '<p class="text-2xl text-secundary"> Filme cadastrado com sucesso! <p>',
+            icon: 'success',
+            iconColor: '#FD3131',
+            showConfirmButton: false,
+            width: '25rem',
+            padding: '0 0 28px 0',
+            heightAuto: false,
+        })
     }
 
 }
