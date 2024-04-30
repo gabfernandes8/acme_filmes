@@ -53,7 +53,7 @@ const validacaoCadastro = () => {
 
 }
 
-const cadastrarFilme = () => {
+const cadastrarFilme = async() => {
 
     if(validacaoCadastro()){
         let filme = {
@@ -61,22 +61,23 @@ const cadastrarFilme = () => {
             sinopse: sinopse.value,
             duracao: duracao.value,
             data_lancamento: dl.value,
+            data_relancamento: null,
             foto_capa: capa.value,
             link_trailer: link.value,
             classificacao_id: classificacaoId.value
         }
 
-        if(dr.value == ''){
-            filme.data_relacamento = null
-        } else {
-            filme.data_relacamento = dr.value
+        if(dr.value != ''){
+            filme.data_relancamento = dr.value
         }
+    
+        const rsCadastro = await postFilme(filme)
 
         Swal.fire({
             timer: 2000,
-            title: '<p class="text-2xl text-secundary"> Filme cadastrado com sucesso! <p>',
+            title: '<p class="text-2xl text-secundary font-fontP"> Filme cadastrado com sucesso! <p>',
             icon: 'success',
-            iconColor: '#FD3131',
+            iconColor: '#00c190',
             showConfirmButton: false,
             width: '25rem',
             padding: '0 0 28px 0',
@@ -85,8 +86,8 @@ const cadastrarFilme = () => {
     } else {
         Swal.fire({
             timer: 2000,
-            title: '<p class="text-2xl text-secundary"> Filme cadastrado com sucesso! <p>',
-            icon: 'success',
+            title: '<p class="text-2xl text-secundary font-fontP"> É necessário preencher todos os dados <p>',
+            icon: 'warning',
             iconColor: '#FD3131',
             showConfirmButton: false,
             width: '25rem',

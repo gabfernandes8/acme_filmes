@@ -57,7 +57,7 @@ const setNovoFilme = async (dadosFilme, contentType) => {
                 }
 
                 if (dadosValitaded) {
-
+        
                     //envia os dados para o DAO inserir no BD
                     let novoFilme = await filmesDAO.insertFilme(dadosFilme);
 
@@ -78,7 +78,7 @@ const setNovoFilme = async (dadosFilme, contentType) => {
 
                     } else {
 
-                        return message.ERROR_INTERNAL_SERVER_DBA; // 500
+                        return message.ERROR_INTERNAL_SERVER_DBA // 500
 
                     }
 

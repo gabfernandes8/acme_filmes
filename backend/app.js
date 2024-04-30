@@ -34,8 +34,8 @@ const bodyParserJSON = bodyParser.json()
 // para funcionar
 app.use((request, response, next) => {
     response.header('Acess-Control-Allow-Origin', '*')
-    response.header('Acess-Control-Allow-Methods', 'GET')
-    app.use(cors)
+    response.header('Acess-Control-Allow-Methods', '*')
+    app.use(cors())
     next()
 })
 

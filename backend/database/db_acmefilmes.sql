@@ -2,6 +2,28 @@ create database db_acmefilmes_DS2A_B;
 
 use db_acmefilmes_DS2A_B;
 
+insert into tbl_filme (
+                                                nome,
+                                                sinopse,
+                                                duracao,
+                                                data_lancamento,
+                                                data_relancamento,
+                                                foto_capa,
+                                                link_trailer,
+                                                classificacao_id
+                                            )values (
+                                                'Teen Beach 2',
+                                                'Brady e Mack estão doidos para voltar às aulas. Mas, quando um outro rapaz dá em cima de Mack, Brady se desentende com ela. Enquanto isso, Lela e Tanner surgem no mundo real, mas precisam voltar ao seu mundo, ou alguns personagens do filme desaparecerão. Brady e Mack tentam ajudá-los a regressar, mas já é tarde demais, e eles são obrigados a criar um novo filme. Nesse novo filme, eles não se conhecem, mas, ao se esbarrarem, acabam se apaixonando novamente.',
+                                                '01:50:00',
+                                                '2015-06-26',
+                                                null,
+                                                'https://upload.wikimedia.org/wikipedia/pt/b/bf/Teen_Beach_2.jpg',
+                                                'https://www.youtube.com/watch?v=bBviLZgUgUw',
+                                                1
+                                            );
+
+select * from tbl_classificacao
+
 create table tbl_classificacao
 (
 	id integer primary key auto_increment not null,
@@ -128,26 +150,6 @@ insert into tbl_classificacao(sigla, icone, descricao)values
 ("16", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/DJCTQ_-_16.svg/75px-DJCTQ_-_16.svg.png", "Histórias com consumo de drogas explícito, agressão física acentuada e insinuação de sexo acentuada."),
 ("18", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/DJCTQ_-_18.svg/75px-DJCTQ_-_18.svg.png", "Histórias com consumo e indução ao consumo de drogas, violência extrema, suicídio, cenas de sexo explícitas e distúrbios psicossomáticos.");
 
-insert into tbl_filme (
-                                                nome,
-                                                sinopse,
-                                                duracao,
-                                                data_lancamento,
-                                                data_relancamento,
-                                                foto_capa,
-                                                link_trailer,
-                                                classificacao_id
-                                            )values (
-                                                'Teen Beach 2',
-                                                'Brady e Mack estão doidos para voltar às aulas. Mas, quando um outro rapaz dá em cima de Mack, Brady se desentende com ela. Enquanto isso, Lela e Tanner surgem no mundo real, mas precisam voltar ao seu mundo, ou alguns personagens do filme desaparecerão. Brady e Mack tentam ajudá-los a regressar, mas já é tarde demais, e eles são obrigados a criar um novo filme. Nesse novo filme, eles não se conhecem, mas, ao se esbarrarem, acabam se apaixonando novamente.',
-                                                '01:50:00',
-                                                '2015-06-26',
-                                                null,
-                                                'https://upload.wikimedia.org/wikipedia/pt/b/bf/Teen_Beach_2.jpg',
-                                                'https://www.youtube.com/watch?v=bBviLZgUgUw',
-                                                1
-                                                );
-
 insert into tbl_diretores(nome) values
 ("Steven Spielberg"),
 ("Jon Watts"),
@@ -165,7 +167,7 @@ insert into tbl_atores (
                                             'Margot Robbie',
                                             '1990-07-02',
                                             null,
--                                           'xcvxcvxcv',
+                                           'xcvxcvxcv',
 											3
                                         );
                                         
@@ -181,8 +183,8 @@ alter table tbl_atores
 -- GET
 select * from tbl_filme where nome like '%be%';
 select * from tbl_filme;
-select nome, sinopse, time_format(data_lancamento, "%Y-%m-%d") as data_lancamento, time_format(data_relancamento, "%Y-%m-%d") as data_relancamento, time_format(duracao, "%H:%i") as duracao, foto_capa, link_trailer, classificacao_id from tbl_filme;
 select * from tbl_atores;
+select * from tbl_sexo;
 
 select * from tbl_diretores where nome like '%g%';
 

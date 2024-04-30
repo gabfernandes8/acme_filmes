@@ -24,12 +24,10 @@ export const getClassificacoes = async() => {
 }
 
 export const getFilmes = async() => {
-
     const url = 'http://localhost:8080/v2/acme_filmes/filmes'
     const response = await fetch(url)
     const data = await response.json()
     return data.filmes
-
 }
 
 export const getFilmeById = async(id) => {
@@ -59,7 +57,9 @@ export const postFilme = async(filme) => {
             classificacao_id: filme.classificacao_id
         })
     }
+    console.log(options.body);
     const response = await fetch(url, options)
+    console.log(response)
     const data = await response.json()
     return data
 }

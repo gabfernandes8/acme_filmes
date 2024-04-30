@@ -241,7 +241,7 @@ const getBuscarAtor = async (id) => {
             // validação para verificar se existem dados de retorno
             if (dadosAtor.length > 0) {
                 // diva 🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺
-                atoresJSON.classificacao = dadosAtor
+                atoresJSON.ator = dadosAtor
                 atoresJSON.status_code = 200
                 return atoresJSON
             } else {

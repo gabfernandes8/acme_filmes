@@ -34,7 +34,7 @@ const montarCard = (arrayFilmes) => {
 window.addEventListener('load', async() => {
     
     const filmes = await getFilmes()
-
+console.log(filmes);
     montarCard(filmes)
 
 })
