@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link rel="shortcut icon" href="../img/acme-filmes-logo 1.png" type="image/x-icon">
     <link rel="stylesheet" href="../../output.css">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/filmes.js" type="module" defer></script>
+    <script src="../js/filmes-cadastrados.js" type="module" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <title>Filmes cadastrados</title>
 </head>
-<body class="font-font min-h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/7ca5b7c7-20aa-42a8-a278-f801b0d65fa1/539c1d05-ea60-4865-88c5-be28fa1ac8b4/BR-pt-20240326-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-no-repeat">
+
+<body
+    class="font-font min-h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/7ca5b7c7-20aa-42a8-a278-f801b0d65fa1/539c1d05-ea60-4865-88c5-be28fa1ac8b4/BR-pt-20240326-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-no-repeat">
     <div class="fixed inset-0  bg-black/80 -z-10"></div>
 
     <header class="p-8 flex">
@@ -24,535 +31,101 @@
             <span class="text-white self-center text-lg">VOLTAR</span>
         </a>
         <div class="flex justify-end items-end h-15 w-full">
-            <img src="../img/acme-filmes-logo 1.png" alt="" >
+            <img src="../img/acme-filmes-logo 1.png" alt="">
         </div>
     </header>
-    
-    <main class="flex flex-col items-center">
+
+    <main class="flex flex-col items-center relative">
         <div class="flex w-screen justify-center p-5">
             <span class="text-white font-font text-4xl">Filmes já cadastrados</span>
         </div>
         <div class="bg-white h-[64vh] w-[120vh] rounded-3xl overflow-hidden">
             <div class="barra-rolagem h-full w-full overflow-auto flex scroll-smooth">
-                <table class="w-full border-4 border-white m-2 relative">
-                    <tr class="text-2xl sticky -top-1 h-[5vh] bg-white">
-                        <th class="font-light border border-gray w-[20%] text-start px-2">Título</th>
-                        <th class="font-light border border-gray w-[15%] text-start px-2">Sinopse</th>
-                        <th class="font-light border border-gray w-[10%] text-center">Duração</th>
-                        <th class="font-light border border-gray w-[15%] text-center">Lançamento</th>
-                        <th class="font-light border border-gray w-[20%] text-start px-2">Relançamento</th>
-                        <th class="font-light border border-gray w-[10%] text-center">Gênero</th>
-                        <th class="font-light border border-gray w-[10%] text-start px-2">Capa</th>
+                <table id="tbl" class="w-full h-fit border-4 border-white m-2 relative">
+                    <tr class="text-2xl sticky -top-1 h-fit bg-white grid grid-cols-12 w-full">
+                        <th class="font-light text-lg border border-gray col-span-2 text-center px-2">Título</th>
+                        <th class="font-light text-lg border border-gray text-center px-2">Sinopse</th>
+                        <th class="font-light text-lg border border-gray text-center px-2">Duração</th>
+                        <th class="font-light text-lg border border-gray col-span-2 text-center px-2">Lançamento</th>
+                        <th class="font-light text-lg border border-gray col-span-2 text-center px-2">Relançamento</th>
+                        <th class="font-light text-lg border border-gray text-center px-2">Capa</th>
+                        <th class="font-light text-xs border border-gray text-center px-2">Classificação</th>
+                        <th class="font-light text-lg border border-gray text-center px-2">Trailer</th>
                         <th class="opacity-0">aaaaaa</th>
                     </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Teen Beach Movie</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Brady e McKenie s...</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">1h50min</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">19/07/2013</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">-</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">Musical</td>
-                        <td class="font-fontP text-xs border border-gray text-start px-2">data:image/jpg...</td>
-                        <td class="border border-gray text-center">
-                            <div class="w-full h-full gap-2 flex justify-center items-center">
-                            <button>
-                                <img src="../img/x.png" class="h-4/5 pl-2">
-                            </button>
-                            <button>
-                                <a href="" class="h-full w-full flex items-center justify-center">
-                                    <img src="../img/editar.png" class="size-7">
-                                </a>
-                            </button>
-                            </div>
-                            
-                        </td>
-                    </tr>
+
+                </table>
             </div>
         </div>
+        <div id="editar-filme" class="hidden inset-0 h-screen w-screen bg-blue flex flex-col p-12 gap-8">
+            <div class="flex items-center justify-between font-bold">
+                <div class="w-12"></div>
+                <h2 class="text-white text-3xl"> Editar Filme </h2>
+                <button class="place-self-end" id="fechar">
+                    <p class="text-white font-fontP text-4xl font-extralight"> X </p>
+                </button>
+            </div>
+            <form action="" class="grid grid-cols-2 h-full py-6 px-56 gap-6">
+                <div class="flex flex-col w-full gap-2 col-span-2">
+                    <label for="nome" class="text-xl">
+                        Nome:
+                    </label>
+                    <input id="nome" type="text" class="bg-white rounded-lg h-10 p-4 text-black/70 focus:outline-none text-lg font-fontP">
+                </div>
+                <div class="flex flex-col w-full gap-2">
+                    <label for="data-lancamento" class="text-xl">
+                        Data de lançamento:
+                    </label>
+                    <input id="data-lancamento" type="date" class="bg-white rounded-lg h-10 p-4 text-black/70 focus:outline-none text-lg font-fontP">
+                </div>
+                <div class="flex flex-col w-full gap-2">
+                    <label for="data-relancamento" class="text-xl">
+                        Data de relançamento (se houver):
+                    </label>
+                    <input id="data-relancamento" type="date" class="bg-white rounded-lg h-10 p-4 text-black/70 focus:outline-none text-lg font-fontP">
+                </div>
+                <div class="flex flex-col w-full gap-2">
+                    <label for="sinopse" class="text-xl">
+                        Sinopse:
+                    </label>
+                    <input id="sinopse" type="text" class="bg-white rounded-lg h-10 p-4 text-black/70 focus:outline-none text-lg font-fontP">
+                </div>
+                <div class="flex flex-col w-full gap-2">
+                    <label for="classificacao" class="text-xl">
+                        Classificação:
+                    </label>
+                    <select name="" id="classificacao" class="bg-white rounded-lg h-10 px-4 text-black/70 focus:outline-none text-lg font-fontP">
+                        <option value="" disabled selected> 
+                            Selecionar
+                        </option>
+                    </select>
+                </div>
+                <div class="flex flex-col w-full gap-2">
+                    <label for="duracao" class="text-xl">
+                        Duração:
+                    </label>
+                    <input id="duracao" type="time" class="bg-white rounded-lg h-10 p-4 text-black/70 focus:outline-none text-lg font-fontP">
+                </div>
+                <div class="flex flex-col w-full gap-2">
+                    <label for="capa" class="text-xl">
+                        Capa:
+                    </label>
+                    <input id="capa" type="url" class="bg-white rounded-lg h-10 p-4 text-black/70 focus:outline-none text-lg font-fontP">
+                </div>
+                <div class="flex flex-col w-full gap-2">
+                    <label for="link" class="text-xl">
+                        Link do trailer:
+                    </label>
+                    <input id="link" type="url" class="bg-white rounded-lg h-10 p-4 text-black/70 focus:outline-none text-lg font-fontP">
+                </div>
+
+                <div class="flex flex-col gap-5 place-self-end justify-end">
+                    <button id="btn" type="button" class="bg-maroon h-10 w-32 rounded-lg text-white place-self-end text-lg font-fontP">
+                        Salvar
+                    </button>
+        </div>
+
     </main>
 </body>
+
 </html>

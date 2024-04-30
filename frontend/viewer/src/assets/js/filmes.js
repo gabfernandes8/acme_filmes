@@ -63,3 +63,46 @@ export const postFilme = async(filme) => {
     const data = await response.json()
     return data
 }
+
+export const deleteFilme = async(id) => {
+
+    try {
+        const url = `http://localhost:8080/v2/acme_filmes/filme/${id}`
+        const options = {
+            method: 'DELETE'
+        }
+        const response = await fetch(url, options)
+        const data = await response.json()
+        return data.filmes[0]
+    } catch (error) {
+        return false
+    }
+
+    
+
+}
+
+export const putFilme = async(filme, id) => {
+    const url = `http://localhost:8080/v2/acme_filmes/filme/${id}`
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            nome: filme.nome,
+            sinopse: filme.sinopse,
+            duracao: filme.duracao,
+            data_lancamento: filme.data_lancamento,
+            data_relancamento: filme.data_relancamento,
+            foto_capa: filme.foto_capa,
+            link_trailer: filme.link_trailer,
+            classificacao_id: filme.classificacao_id
+        })
+    }
+    console.log(options.body);
+    const response = await fetch(url, options)
+    console.log(response)
+    const data = await response.json()
+    return data
+}
