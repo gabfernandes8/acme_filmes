@@ -150,7 +150,7 @@ const setAtualizarFilme = async (dadosFilme, contentType, id) => {
                 if (dadosValitaded) {
 
                     //envia os dados para o DAO inserir no BD
-                    let filmeAtt = await filmesDAO.updateFilme(dadosFilme, filme);
+                    let filmeAtt = await filmesDAO.updateFilme(dadosFilme, filme)
 
                     //validação para verificar se os dados foram inseridos pelo DAO no BD 
                     if (filmeAtt) {

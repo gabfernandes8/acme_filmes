@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./assets/img/acme-filmes-logo 1.png" type="image/x-icon">
     <link rel="stylesheet" href="./output.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="./assets/js/login.js" defer></script>
     <title>ACME Filmes</title>
 </head>
 <body class="font-font relative gap-4 h-screen flex items-center justify-center flex-col bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/7ca5b7c7-20aa-42a8-a278-f801b0d65fa1/539c1d05-ea60-4865-88c5-be28fa1ac8b4/BR-pt-20240326-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-cover bg-no-repeat">
@@ -27,14 +29,14 @@
                     <label for="email" class="text-xl">
                         Digite seu email:
                     </label>
-                    <input type="email" class="bg-blue/60 rounded-3xl p-2 focus:outline-none text-black/70">
+                    <input id="user" type="email" class="bg-blue/60 rounded-3xl p-2 focus:outline-none text-black/70">
                 </div>
     
                 <div class="flex flex-col w-full justify-center gap-1">
                     <label for="password" class="text-xl">
                         Digite sua senha:
                     </label>
-                    <input type="password" class="bg-blue/60 rounded-3xl p-2 focus:outline-none text-black/70">
+                    <input id="password" type="password" class="bg-blue/60 rounded-3xl p-2 focus:outline-none text-black/70">
                 </div>
 
                 <p class="font-bold text-red-500 text-xl">
@@ -42,7 +44,7 @@
                 </P>
             </fieldset>
 
-            <button class="border-solid border-maroon border-[1px] shadow-[-0px_3px_3px_0px_rgba(0,0,0,0.50)] px-5 py-2 text-xl">
+            <button id="login" type="button" class="border-solid border-maroon border-[1px] shadow-[-0px_3px_3px_0px_rgba(0,0,0,0.50)] px-5 py-2 text-xl">
                 Entrar
             </button>
         </form>
@@ -62,28 +64,28 @@
                         <label for="name" class="text-xl">
                             Nome:
                         </label>
-                        <input type="name" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-black/70">
+                        <input id="nome" type="name" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-black/70">
                     </div>
         
                     <div class="flex flex-col w-full justify-center gap-1">
-                        <label for="date" class="text-xl">
+                        <label id="dn" for="date" class="text-xl">
                             Data de nascimento:
                         </label>
-                        <input type="date" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-maroon/60">
+                        <input id="dn" type="date" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-maroon/60">
                     </div>
 
                     <div class="flex flex-col w-full justify-center gap-1">
                         <label for="email" class="text-xl">
                             Digite seu email:
                         </label>
-                        <input type="email" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-black/70">
+                        <input id="email" type="email" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-black/70">
                     </div>
         
                     <div class="flex flex-col w-full justify-center gap-1">
-                        <label for="password" class="text-xl">
+                        <label for="senha" class="text-xl">
                             Digite sua senha:
                         </label>
-                        <input type="password" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-black/70">
+                        <input id="senha" type="password" class="bg-white/90 rounded-3xl p-2 focus:outline-none text-black/70">
                     </div>
                 </fieldset>
 

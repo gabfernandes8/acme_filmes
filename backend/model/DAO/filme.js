@@ -94,12 +94,13 @@ const updateFilme = async (dadosFilme, id) => {
                                         sinopse = "${dadosFilme.sinopse}", 
                                         duracao = "${dadosFilme.duracao}", 
                                         data_lancamento = "${dadosFilme.data_lancamento}",
-                                        data_lancamento = null,
+                                        data_relancamento = null,
                                         foto_capa = "${dadosFilme.foto_capa}",
                                         link_trailer = "${dadosFilme.link_trailer}",
-                                        classificacao_id = "${dadosFilme.classificacao_id}"
+                                        classificacao_id = ${dadosFilme.classificacao_id}
                                         
                                         where id = ${id}`
+
         } else {
             sql = `update tbl_filme set  
                                         nome = "${dadosFilme.nome}",
@@ -109,11 +110,13 @@ const updateFilme = async (dadosFilme, id) => {
                                         data_relancamento = "${dadosFilme.data_relancamento}",
                                         foto_capa = "${dadosFilme.foto_capa}",
                                         link_trailer = "${dadosFilme.link_trailer}",
-                                        classificacao_id = "${dadosFilme.classificacao_id}"
+                                        classificacao_id = ${dadosFilme.classificacao_id}
                                         
                                         where id = ${id}`
+        
         }
 
+        console.log(sql);
             // executa o sciptSQL no DB (devemos usar o comando execute e não o query)
             // o comando execute deve ser utilizado para INSERT, UPDATE, DELETE
             let result = await prisma.$executeRawUnsafe(sql)

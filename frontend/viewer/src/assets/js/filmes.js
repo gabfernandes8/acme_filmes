@@ -57,9 +57,8 @@ export const postFilme = async(filme) => {
             classificacao_id: filme.classificacao_id
         })
     }
-    console.log(options.body);
+    
     const response = await fetch(url, options)
-    console.log(response)
     const data = await response.json()
     return data
 }

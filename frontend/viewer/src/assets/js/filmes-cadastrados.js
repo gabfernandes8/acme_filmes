@@ -14,6 +14,7 @@ const capa = document.getElementById('capa')
 const dl = document.getElementById('data-lancamento')
 const link = document.getElementById('link')
 const botaoSalvar = document.getElementById('btn')
+const tabelaBody = tabela.children[0]
 
 const criarLinha = async(filme) => {
 
@@ -101,7 +102,9 @@ const criarLinha = async(filme) => {
                 }).then( async (result) => {
                 
                 if (result.isConfirmed) {
+                    removeTableChildren()
                     const rsDelete = await deleteFilme(filme.id)
+                    setTabela()                
                 }
             
             })
@@ -131,10 +134,26 @@ const criarLinha = async(filme) => {
 
 }
 
-const setTabela = (filmes) => {
+const removeTableChildren = () => {
+
+    const tabelaBodyFilhos = tabelaBody.children
+
+    for (let linha  of tabelaBodyFilhos) {
+        if (linha != tabelaBodyFilhos.firstChild) {
+            const dick = tabelaBody.removeChild(linha)             
+            console.log(dick);
+               
+        }
+    }
+
+}
+
+const setTabela = async() => {
+
+    const filmes = await getFilmes()
     filmes.forEach(async(filme) => {
         const linha = await criarLinha(filme)
-        tabela.children[0].appendChild(linha)
+        tabelaBody.appendChild(linha)
     })
 }
 
@@ -245,9 +264,12 @@ const updateFilme = async() => {
 
 btnFechar.addEventListener('click', fecharEdit)
 
-botaoSalvar.addEventListener('click', updateFilme)
+botaoSalvar.addEventListener('click', async() => {
+    removeTableChildren()
+    updateFilme()
+    setTabela()
+})
 
 window.addEventListener('load', async() => {
-    const filmes = await getFilmes()
-    setTabela(filmes)
+    setTabela()
 })

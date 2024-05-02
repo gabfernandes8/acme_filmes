@@ -12,8 +12,8 @@ model tbl_atores {
   nome                     String                     @db.VarChar(150)
   data_nascimento          DateTime                   @db.Date
   data_falecimento         DateTime?                  @db.Date
+  biografia                String                     @db.VarChar(255)
   sexo_id                  Int
-  biografia                String?                    @db.Text
   tbl_sexo                 tbl_sexo                   @relation(fields: [sexo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tbl_atores_ibfk_1")
   tbl_atores_nacionalidade tbl_atores_nacionalidade[]
   tbl_filmes_atores        tbl_filmes_atores[]
