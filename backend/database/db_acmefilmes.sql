@@ -22,8 +22,6 @@ insert into tbl_filme (
                                                 1
                                             );
 
-select * from tbl_classificacao;
-
 create table tbl_classificacao
 (
 	id integer primary key auto_increment not null,
@@ -155,36 +153,30 @@ insert into tbl_diretores(nome) values
 ("Jon Watts"),
 ("Greta Gerwig");
 
-desc tbl_atores;
+insert into tbl_genero(nome)values
+("Ação"),
+("Suspense"),
+("Drama"),
+("Comédia"),
+("Infantil"),
+("Musical"),
+("Fantasia"),
+("Aventura"),
+("Thriller"),
+("Terror"),
+("Romance"),
+("Documentário");
 
-insert into tbl_atores (
-                                            nome,
-                                            data_nascimento,
-                                            data_falecimento,
-                                            biografia,
-                                            sexo_id
-                                        )values (
-                                            'Margot Robbie',
-                                            '1990-07-02',
-                                            null,
-                                           'xcvxcvxcv',
-											3
-                                        );
-                                        
-                                        
-delete from tbl_atores where id > 0;
-alter table tbl_atores 
-	drop column biografia;
-    
-alter table tbl_atores
-	add column biografia text;
-                                        
-                                        select * from tbl_atores;
+insert into tbl_filmes_genero (genero_id, filme_id)values
+(8, 17);                                
+
 -- GET
 select * from tbl_filme where nome like '%be%';
 select * from tbl_filme;
 select * from tbl_atores;
 select * from tbl_sexo;
+select id, nome from tbl_filme;
+select id, nome from tbl_genero;
 
 select * from tbl_diretores where nome like '%g%';
 
@@ -193,14 +185,12 @@ delete from tbl_filme where id = 1;
 
 -- PUT
 update tbl_filme set  
-                                        nome = "Teen Beach 2pinto",
-                                        sinopse = "Brady e Mack estão doidos para voltar às aulas. Mas, quando um outro rapaz dá em cima de Mack, Brady se desentende com ela. Enquanto isso, Lela e Tanner surgem no mundo real, mas precisam voltar ao seu mundo, ou alguns personagens do filme desaparecerão. Brady e Mack tentam ajudá-los a regressar, mas já é 
-tarde demais, e eles são obrigados a criar um novo filme. Nesse novo filme, eles não se conhecem, mas, ao se esbarrarem, acabam se apaixonando novamente.",
-                                        duracao = "01:50:00",
-                                        data_lancamento = "2015-06-26",
-                                        data_lancamento = null,
-                                        foto_capa = "https://upload.wikimedia.org/wikipedia/pt/b/bf/Teen_Beach_2.jpg",
-                                        link_trailer = "https://www.youtube.com/watch?v=bBviLZgUgUw",
-                                        classificacao_id = 1
+					nome = "Barbie",
+					sinopse = "Barbie começa a ter pensamentos estranhos e sua aparência muda, então ela parte para o mundo real com Ken para tentar encontrar uma solução e voltar a ser uma boneca perfeita.",
+					duracao = "01:54:00",
+					data_lancamento = "2023-07-20",
+					data_relancamento = "2024-03-20",
+					foto_capa = "https://upload.wikimedia.org/wikipedia/pt/8/82/Barbie_%282023%29.jpg",
+					valor_unitario = 20
 
-                                        where id = 13
+					where id = 13;

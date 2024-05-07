@@ -236,6 +236,7 @@ const updateFilme = async() => {
         }
 
         const rsUpdate = await putFilme(filme, localStorage.getItem('editMovieId'))
+        console.log(rsUpdate);
 
         Swal.fire({
             timer: 2000,

@@ -8,7 +8,9 @@
 
 // import do arquivo DAO para manipular dados do BD
 const atoresDAO = require('../model/DAO/ator.js')
+const nacionalidadesAtoresDAO = require('../model/DAO/ator-nacionalidade.js')
 const controllerSexo = require('./controller_sexo.js')
+const controllerNacionalidadeAtores = require('./controller_atores-nacionalidade.js')
 
 // import do arquivo de configuração do projeto
 const message = require('../modulo/config.js')
@@ -203,9 +205,15 @@ const getListarAtores = async () => {
             const promisse = dadosAtores.map(async(ator) => {
 
                 let sexo = await controllerSexo.getBuscarGender(ator.sexo_id)
+                let nacionalidade = await controllerNacionalidadeAtores.getListarNacionalidadesAtores(ator.id)
 
                 if(sexo.status_code == 200){
                     ator.sexo = sexo.gender 
+                }
+
+
+                if(nacionalidade.status_code == 200){
+                    ator.nacionalidades = nacionalidade.nacionalidade_ator 
                 }
             })
 
@@ -241,6 +249,18 @@ const getBuscarAtor = async (id) => {
             // validação para verificar se existem dados de retorno
             if (dadosAtor.length > 0) {
                 // diva 🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺🥺
+
+                let sexo = await controllerSexo.getBuscarGender(ator.sexo_id)
+                let nacionalidade = await controllerNacionalidadeAtores.getListarNacionalidadesAtores(ator.id)
+
+                if(sexo.status_code == 200){
+                    ator.sexo = sexo.gender 
+                }
+
+                if(nacionalidade.status_code == 200){
+                    ator.nacionalidades = nacionalidade.nacionalidade_ator 
+                }
+
                 atoresJSON.ator = dadosAtor
                 atoresJSON.status_code = 200
                 return atoresJSON
@@ -280,11 +300,42 @@ const getAtorByNome = async (nome) => {
     }
 }
 
+const getListarNacionalidadesAtor = async(id) => {
+    try {
+        
+        let idAtor = id
+        let nacionalidadeJSON = {} 
+
+        if (idAtor == '' || idAtor == undefined || isNaN(idAtor)) {
+            return message. // 400
+        } else {
+            let dadosNacionalidades = await nacionalidadesAtoresDAO.selectAllNacionalidadesByIdAtor(idAtor)
+
+            if(dadosNacionalidades){
+                if(dadosNacionalidades.length > 0){
+                    nacionalidadeJSON.nacionalidades = dadosNacionalidades
+                    nacionalidadeJSON.status_code = 200
+                    return nacionalidadeJSON
+                } else {
+                    return message.ERROR_NOT_FOUND // 404
+                }
+            } else {
+                return message.ERROR_INTERNAL_SERVER_DBA
+            }
+
+        }
+
+    } catch (error) {
+        message.ERROR_INTERNAL_SERVER // 500
+    }
+}
+
 module.exports = {
     setNovoAtor,
     setAtualizarAtor,
     setExcluirAtor,
     getListarAtores,
     getBuscarAtor,
-    getAtorByNome
+    getAtorByNome,
+    getListarNacionalidadesAtor
 }

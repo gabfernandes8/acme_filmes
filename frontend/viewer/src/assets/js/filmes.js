@@ -41,6 +41,7 @@ export const getFilmeById = async(id) => {
 
 export const postFilme = async(filme) => {
     const url = `http://localhost:8080/v2/acme_filmes/filme/`
+    console.log(url);
     const options = {
         method: 'POST',
         headers: {
@@ -99,7 +100,6 @@ export const putFilme = async(filme, id) => {
             classificacao_id: filme.classificacao_id
         })
     }
-    console.log(options.body);
     const response = await fetch(url, options)
     console.log(response)
     const data = await response.json()

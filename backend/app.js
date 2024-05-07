@@ -47,6 +47,7 @@ app.use((request, response, next) => {
     const controllerGenero = require('./controller/controller_genero.js')
     const controllerClassificacao = require('./controller/controller_classificacao.js')
     const controllerAtores = require('./controller/controller_atores.js')
+    const controllerNacionalidadesAtores = require('./controller/controller_atores-nacionalidade.js')
 /*******************************************************************************/
 
 // #region FILMES
@@ -694,6 +695,82 @@ app.put('/v2/acme_filmes/ator/:id', cors(), bodyParserJSON, async(request, respo
 
     // encaminha os dados da requisição para a controller enviar para o BD
     let resultDados = await controllerAtores.setAtualizarAtor(dadosBody, contentType, ator)
+    
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+
+
+})
+/*******************************************************************************/
+
+
+/*************************** ENDPOINTS DE NACIONALIDADES DE ATORES  ********************************/
+
+// endpoint: listar os atores
+app.get('/v2/acme_filmes/nacionalidades_atores', cors(), async(request, response, next) => {
+
+    // chama a função para retornar os dados da classificacao
+    let dadosNacionalidadeAtor = await controllerNacionalidadesAtores.getListarNacionalidadesAtores()
+
+    response.status(dadosNacionalidadeAtor.status_code)
+    response.json(dadosNacionalidadeAtor)
+})
+
+// endpoint: retorna os dados do ator, filtrando pelo ID
+app.get('/v2/acme_filmes/nacionalidade_ator/:id', cors(), async(request, response, next) => {
+    // recebe o id da requisição do ator
+    let idAtor = request.params.id
+
+    let dadosNacionalidadeAtor = await controllerNacionalidadesAtores.getBuscarNacionalidadeAtor(idAtor)
+
+    response.status(dadosNacionalidadeAtor.status_code)
+    response.json(dadosNacionalidadeAtor)
+})
+
+// endpoint: inserir novas classificacoes no Banco de Dados
+    // não esquecer de colocar o bodyParserJSON que é quem define o formato de chegada dos dados
+    // obs: esse objeto foi criado no início do projeto
+app.post('/v2/acme_filmes/nacionalidade_ator', cors(), bodyParserJSON, async(request, response, next) => {
+
+    // recebe o content type da requisição (A API deve receber somente application/json)
+    let contentType = request.headers['content-type']
+
+    //recebe os dados encaminhados na requisição no body(JSON)
+    let dadosBody = request.body
+
+    // encaminha os dados da requisição para a controller enviar para o BD
+    let resultDados = await controllerNacionalidadesAtores.setNovaNacionalidadeAtor(dadosBody, contentType)
+    
+    response.status(resultDados.status_code)
+    response.json(resultDados)
+
+})
+
+// endpoint: excluir um ator pelo id
+app.delete('/v2/acme_filmes/nacionalidade_ator/:id', cors(), async(request, response, next) => {
+
+    let idNacionalidade = request.params.id
+
+    let dadosNacionalidadeAtor = await controllerNacionalidadesAtores.setExcluirNacionalidadeAtor(idNacionalidade)
+
+    response.status(dadosNacionalidadeAtor.status_code)
+    response.json(dadosNacionalidadeAtor)
+
+})
+
+// endpoint: atualizar ator
+app.put('/v2/acme_filmes/nacionalidade_ator/:id', cors(), bodyParserJSON, async(request, response, next) => {
+
+    let idNacionalidadeAtor = request.params.id
+
+    // recebe o content type da requisição (A API deve receber somente application/json)
+    let contentType = request.headers['content-type']
+
+    //recebe os dados encaminhados na requisição no body(JSON)
+    let dadosBody = request.body
+
+    // encaminha os dados da requisição para a controller enviar para o BD
+    let resultDados = await controllerNacionalidadesAtores.setAtualizarNacionalidadeAtor(dadosBody, contentType, idNacionalidadeAtor)
     
     response.status(resultDados.status_code)
     response.json(resultDados)
