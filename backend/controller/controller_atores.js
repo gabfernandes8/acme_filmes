@@ -307,7 +307,7 @@ const getListarNacionalidadesAtor = async(id) => {
         let nacionalidadeJSON = {} 
 
         if (idAtor == '' || idAtor == undefined || isNaN(idAtor)) {
-            return message. // 400
+            return message.ERROR_INVALID_ID // 400
         } else {
             let dadosNacionalidades = await nacionalidadesAtoresDAO.selectAllNacionalidadesByIdAtor(idAtor)
 

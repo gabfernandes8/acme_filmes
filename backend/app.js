@@ -714,6 +714,7 @@ app.get('/v2/acme_filmes/nacionalidades_atores', cors(), async(request, response
 
     response.status(dadosNacionalidadeAtor.status_code)
     response.json(dadosNacionalidadeAtor)
+
 })
 
 // endpoint: retorna os dados do ator, filtrando pelo ID

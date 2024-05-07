@@ -8,8 +8,8 @@
 const nacionalidadesAtoresDAO = require('../model/DAO/ator-nacionalidade.js')
 const message = require('../modulo/config.js')
 
-const controllerNacionalidades = require('./controller-nacionalidade.js')
-const controllerAtores = require('./controller-atores.js')
+const controllerNacionalidades = require('./controller_nacionalidade.js')
+const controllerAtores = require('./controller_atores.js')
 
 //Função para inserir uma nova relação de nacionalidade e ator no Banco de Dados
 const setNovaNacionalidadeAtor = async(dadosNacionalidadeAtor, contentType) => {
@@ -164,7 +164,6 @@ const getListarNacionalidadesAtores = async() => {
     try {
         let nacionalidadeAtorJSON = {}
         let dadosNacionalidadeAtor = await nacionalidadesAtoresDAO.selectAllNacionalidadesAtores()
-
         if(dadosNacionalidadeAtor){
             
             if(dadosNacionalidadeAtor.length > 0) {
@@ -179,7 +178,7 @@ const getListarNacionalidadesAtores = async() => {
             }
 
         }else{
-            return message.ERROR_INTERNAL_SERVER_DB // 500
+            return message.ERROR_INTERNAL_SERVER_DBA // 500
         }
       
     } catch (error) {

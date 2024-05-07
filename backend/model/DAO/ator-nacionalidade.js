@@ -57,7 +57,8 @@ const deleteNacionalidadeAtor = async (id) => {
 const selectAllNacionalidadesAtores = async () => {   
 
     try {
-        let sql = 'select tbl_atores_nacionalidade.id, tbl_atores_nacionalidade.atores_id, tbl_atores.nome as ator, tbl_atores_nacionalidade.nacionalidade_id, tbl_nacionalidade.nome as nacionalidade from tbl_atores_nacionalidade inner join tbl_nacionalidade on tbl_atores_nacionalidade.nacionalidade_id=tbl_nacionalidade.id inner join tbl_ator on tbl_atores_nacionalidade.atores_id=tbl_atores.id order by tbl_atores_nacionalidade.id desc'
+        let sql = 'select tbl_atores_nacionalidade.id, tbl_atores_nacionalidade.atores_id, tbl_atores.nome as ator, tbl_atores_nacionalidade.nacionalidade_id, tbl_nacionalidade.nome as nacionalidade from tbl_atores_nacionalidade inner join tbl_nacionalidade on tbl_atores_nacionalidade.nacionalidade_id=tbl_nacionalidade.id inner join tbl_atores on tbl_atores_nacionalidade.atores_id=tbl_atores.id order by tbl_atores_nacionalidade.id desc'
+        console.log(sql);
         let rsNacionalidadeAtor = await prisma.$queryRawUnsafe(sql)
         return rsNacionalidadeAtor
     } catch (error) {
@@ -70,7 +71,7 @@ const selectAllNacionalidadesAtores = async () => {
 const selectByIdNacionalidadeAtor = async (id) => {
 
     try {
-        let sql = `select tbl_atores_nacionalidade.id, tbl_atores_nacionalidade.atores_id, tbl_atores.nome as ator, tbl_atores_nacionalidade.nacionalidade_id, tbl_nacionalidade.nome as nacionalidade from tbl_atores_nacionalidade inner join tbl_nacionalidade on tbl_atores_nacionalidade.nacionalidade_id=tbl_nacionalidade.id inner join tbl_ator as tbl_atores on tbl_atores_nacionalidade.atores_id=tbl_atores.id where tbl_atores_nacionalidade.id = ${id}`
+        let sql = `select tbl_atores_nacionalidade.id, tbl_atores_nacionalidade.atores_id, tbl_atores.nome as ator, tbl_atores_nacionalidade.nacionalidade_id, tbl_nacionalidade.nome as nacionalidade from tbl_atores_nacionalidade inner join tbl_nacionalidade on tbl_atores_nacionalidade.nacionalidade_id=tbl_nacionalidade.id inner join tbl_atores as tbl_atores on tbl_atores_nacionalidade.atores_id=tbl_atores.id where tbl_atores_nacionalidade.id = ${id}`
         let rsNacionalidadeAtor = await prisma.$queryRawUnsafe(sql)
         return rsNacionalidadeAtor
     } catch (error) {
