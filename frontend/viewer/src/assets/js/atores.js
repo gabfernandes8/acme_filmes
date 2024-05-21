@@ -2,7 +2,7 @@
 
 export const getGeneroById = async(id) => {
     try{
-        const url = `http://localhost:8080/v2/acme_filmes/gender/${id}`
+        const url = `https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/gender/${id}`
         const response = await fetch(url)
         const data = await response.json()
 
@@ -16,7 +16,7 @@ export const getGeneroById = async(id) => {
 
 export const getGeneros = async() => {
 
-    const url = 'http://localhost:8080/v2/acme_filmes/gender'
+    const url = 'https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/gender'
     const response = await fetch(url)
     const data = await response.json()
     return data.genders
@@ -24,7 +24,7 @@ export const getGeneros = async() => {
 }
 
 export const getAtores = async() => {
-    const url = 'http://localhost:8080/v2/acme_filmes/atores'
+    const url = 'https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/atores'
     const response = await fetch(url)
     const data = await response.json()
     return data.atores
@@ -32,7 +32,7 @@ export const getAtores = async() => {
 
 export const getAtorById = async(id) => {
 
-    const url = `http://localhost:8080/v2/acme_filmes/ator/${id}`
+    const url = `https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/ator/${id}`
     const response = await fetch(url)
     const data = await response.json()
     return data.ator[0]
@@ -40,7 +40,7 @@ export const getAtorById = async(id) => {
 }
 
 export const postAtor = async(ator) => {
-    const url = `http://localhost:8080/v2/acme_filmes/ator/`
+    const url = `https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/ator/`
     const options = {
         method: 'POST',
         headers: {

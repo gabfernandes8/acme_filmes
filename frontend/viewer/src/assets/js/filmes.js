@@ -2,7 +2,7 @@
 
 export const getClassificacaoById = async(id) => {
     try{
-        const url = `http://localhost:8080/v2/acme_filmes/classificacao/${id}`
+        const url = `https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/classificacao/${id}`
         const response = await fetch(url)
         const data = await response.json()
 
@@ -16,7 +16,7 @@ export const getClassificacaoById = async(id) => {
 
 export const getClassificacoes = async() => {
 
-    const url = 'http://localhost:8080/v2/acme_filmes/classificacao'
+    const url = 'https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/classificacao'
     const response = await fetch(url)
     const data = await response.json()
     return data.classificacoes
@@ -24,7 +24,7 @@ export const getClassificacoes = async() => {
 }
 
 export const getFilmes = async() => {
-    const url = 'http://localhost:8080/v2/acme_filmes/filmes'
+    const url = 'https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/filmes'
     const response = await fetch(url)
     const data = await response.json()
     return data.filmes
@@ -32,7 +32,7 @@ export const getFilmes = async() => {
 
 export const getFilmeById = async(id) => {
 
-    const url = `http://localhost:8080/v2/acme_filmes/filme/${id}`
+    const url = `https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/filme/${id}`
     const response = await fetch(url)
     const data = await response.json()
     return data.filmes[0]
@@ -40,7 +40,7 @@ export const getFilmeById = async(id) => {
 }
 
 export const postFilme = async(filme) => {
-    const url = `http://localhost:8080/v2/acme_filmes/filme/`
+    const url = `https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/filme/`
     console.log(url);
     const options = {
         method: 'POST',
@@ -67,7 +67,7 @@ export const postFilme = async(filme) => {
 export const deleteFilme = async(id) => {
 
     try {
-        const url = `http://localhost:8080/v2/acme_filmes/filme/${id}`
+        const url = `https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/filme/${id}`
         const options = {
             method: 'DELETE'
         }
@@ -83,7 +83,7 @@ export const deleteFilme = async(id) => {
 }
 
 export const putFilme = async(filme, id) => {
-    const url = `http://localhost:8080/v2/acme_filmes/filme/${id}`
+    const url = `https://acme-filmes-ny9j.onrender.com/v2/acme_filmes/filme/${id}`
     const options = {
         method: 'PUT',
         headers: {
