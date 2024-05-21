@@ -2,26 +2,6 @@ create database db_acmefilmes_DS2A_B;
 
 use db_acmefilmes_DS2A_B;
 
-insert into tbl_filme (
-                                                nome,
-                                                sinopse,
-                                                duracao,
-                                                data_lancamento,
-                                                data_relancamento,
-                                                foto_capa,
-                                                link_trailer,
-                                                classificacao_id
-                                            )values (
-                                                'Teen Beach 2',
-                                                'Brady e Mack estão doidos para voltar às aulas. Mas, quando um outro rapaz dá em cima de Mack, Brady se desentende com ela. Enquanto isso, Lela e Tanner surgem no mundo real, mas precisam voltar ao seu mundo, ou alguns personagens do filme desaparecerão. Brady e Mack tentam ajudá-los a regressar, mas já é tarde demais, e eles são obrigados a criar um novo filme. Nesse novo filme, eles não se conhecem, mas, ao se esbarrarem, acabam se apaixonando novamente.',
-                                                '01:50:00',
-                                                '2015-06-26',
-                                                null,
-                                                'https://upload.wikimedia.org/wikipedia/pt/b/bf/Teen_Beach_2.jpg',
-                                                'https://www.youtube.com/watch?v=bBviLZgUgUw',
-                                                1
-                                            );
-
 create table tbl_classificacao
 (
 	id integer primary key auto_increment not null,
