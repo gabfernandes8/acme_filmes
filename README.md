@@ -8,11 +8,15 @@
 <br>
 
 ## 🤔 sobre o projeto
-- Projeto desenvolvido na disiciplina de Programação Web Back-End II (PWBE II), no curso de Desenvolvimento de Sistemas no SENAI Jandira, orientado pelo professor Fernando Leonid e Marcel Teixeira.
-- Projeto full-stack
-- FrontEnd: Tailwind CSS e JavaScript
-- BackEnd: Node.js
-- Banco de Dados: MySQL 
+- Projeto desenvolvido na disiciplina de Programação Web Back-End II (PWBE II), no curso de Desenvolvimento de Sistemas no SENAI Jandira, orientado pelo professor Fernando Leonid e Marcel Teixeira;
+
+- Projeto full-stack;
+
+- FrontEnd: framework Tailwind CSS e JavaScript;
+
+- BackEnd: Node.js;
+
+- Banco de Dados: MySQL.
 
 <br>
 
@@ -22,7 +26,7 @@
 - [x] Criou pastas para separar os diversos tipos de arquivos?
 - [x] Utilizou variáveis CSS para cores e padrões?
 - [x] ```Foi utilizado o método GET para listar os filmes?```
-- [ ] Criou alguma funcionalidade além do especificado no projeto?
+- [x] Criou alguma funcionalidade além do especificado no projeto?
 - [x] ```Foi utilizado o método POST para cadastrar os filmes?```
 - [x] Modularizou o projeto? ou seja, criou arquivos diferente dependendo da sua funcionalidade ou objetivo?
 - [x] ```Foi utilizado o método PUT para modificar alguma informação dos filmes?```
@@ -38,12 +42,26 @@
 ## 💻 linguagens e ferramentas utilizadas
 
 <div>
+
+  #### Ferramentas
+  <img src="https://img.shields.io/badge/Visual%20Studio-0D1117.svg?style=flat-square&logo=visual-studio&logoColor=007ACC" alt="Visual Studio">
+  <img src="https://img.shields.io/badge/Figma-0D1117.svg?style=flat-square&logo=figma&logoColor=F24E1E" alt="FIGMA">
+
+  #### FrontEnd
   <img src="https://img.shields.io/badge/Tailwind_CSS-0D1117?style=flat-square&logo=tailwind-css&logoColor=1572B6" alt="tailwind">
+
+  #### BackEnd
   <img src="https://img.shields.io/badge/-JavaScript-0D1117?style=flat-square&logo=javascript&labelColor=0D1117&textColor=0D1117" alt="js">
   <img src="https://img.shields.io/badge/-Node.JS-0D1117?style=flat-square&logo=node.js&labelColor=0D1117&textColor=0D1117" alt="node">
+  <img src="https://img.shields.io/badge/Express%20JS-0D1117?style=flat-square&logo=express&logoColor=white" alt="express">
+  <img src="https://img.shields.io/badge/Prisma-0D1117?style=flat-square&logo=prisma&logoColor=3982CE" alt="prisma">
+
+  #### Banco de Dados
   <img src="https://img.shields.io/badge/-MySQL-0D1117?style=flat-square&logo=mysql&labelColor=0D1117&textColor=0D1117" alt="mysql">
-  <img src="https://img.shields.io/badge/Visual%20Studio-0D1117.svg?style=flat-square&logo=visual-studio&logoColor=007ACC" alt="Visual Studio">
-  <img src="https://img.shields.io/badge/Figma-0D1117.svg?style=flat-square&logo=figma&logoColor=" alt="FIGMA">
+
+  #### Hospedagem
+  <img src="https://img.shields.io/badge/Microsoft_Azure-0D1117?style=flat-square&logo=microsoft-azure&logoColor=blue" alt="azure">
+  <img src="https://img.shields.io/badge/Render-0D1117?style=flat-square&logo=render&logoColor=46E3B7" alt="render">
 </div>
 
 <br>

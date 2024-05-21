@@ -1,8 +1,9 @@
 'use strict'
 
-import { getFilmes } from './filmes.js'
+import { getFilmes, getFilmeByName } from './filmes.js'
 
 const main = document.getElementById('main')
+const search = document.getElementById('buxca')
 
 const criarCard = (filme) => {
 
@@ -21,6 +22,7 @@ const criarCard = (filme) => {
 }
 
 const montarCard = (arrayFilmes) => {
+    main.replaceChildren('')
 
     arrayFilmes.forEach((filme) => {
         const card = criarCard(filme)
@@ -31,11 +33,22 @@ const montarCard = (arrayFilmes) => {
 
 }
 
-window.addEventListener('load', async() => {
-    
+const montarTodosFilmes = async() => {
     const filmes = await getFilmes()
-console.log(filmes);
     montarCard(filmes)
+}
 
+search.addEventListener('keyup', async() => {
+    const nomeFilme = search.value
+
+    if(nomeFilme != ''){
+        const filmesFiltrados = await getFilmeByName(nomeFilme)
+        if(filmesFiltrados.length > 0){
+            montarCard(filmesFiltrados)
+        }
+    } else {
+        montarTodosFilmes()
+    }
 })
 
+window.addEventListener('load', montarTodosFilmes)

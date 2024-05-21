@@ -39,6 +39,15 @@ export const getFilmeById = async(id) => {
 
 }
 
+export const getFilmeByName = async(nome) => {
+
+    const url = `https://acme-filmes-27cn.onrender.com/v2/acme_filmes/filmes/filtro?nome=${nome}`
+    const response = await fetch(url)
+    const data = await response.json()
+    return data.filmes
+
+}
+
 export const postFilme = async(filme) => {
     const url = `https://acme-filmes-27cn.onrender.com/v2/acme_filmes/filme/`
     console.log(url);
