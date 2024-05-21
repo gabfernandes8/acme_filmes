@@ -16,7 +16,7 @@
 
 <br>
 
-##  📍 etapas do projeto (FrontEnd)
+##  📍 critérios do projeto (FrontEnd)
 
 - [x] ```Todas as telas prototipadas foram criadas conforme figma?```
 - [x] Criou pastas para separar os diversos tipos de arquivos?
