@@ -9,7 +9,7 @@
 const { PrismaClient } = require('@prisma/client')
 
 // instanciando o objeto prisma com as caracteristicas do prisma client
-const prisma = new PrismaClient
+const prisma = new PrismaClient()
 
 // inserir um novo diretor
 const insertDiretor = async (dadosDiretor) => {

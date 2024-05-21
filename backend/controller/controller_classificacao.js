@@ -170,7 +170,6 @@ const getListarClassificacoes = async () => {
     let classificacaoJSON = {}
 
     let dadosClassificacoes = await classificacaoDAO.selectAllClassificacao()
-
     if (dadosClassificacoes) {
         if (dadosClassificacoes.length > 0) {
             classificacaoJSON.classificacoes = dadosClassificacoes

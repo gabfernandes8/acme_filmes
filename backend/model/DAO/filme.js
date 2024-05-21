@@ -9,7 +9,7 @@
 const { PrismaClient } = require('@prisma/client')
 
 // instanciando o objeto prisma com as caracteristicas do prisma client
-const prisma = new PrismaClient
+const prisma = new PrismaClient()
 
 // inserir um novo filme
 const insertFilme = async (dadosFilme) => {
@@ -161,7 +161,7 @@ const selectAllFilmes = async () => {
 
     try {
         let sql = 'select id, nome, sinopse, date_format(data_lancamento, "%Y-%m-%d") as data_lancamento, date_format(data_relancamento, "%Y-%m-%d") as data_relancamento, time_format(duracao, "%H:%i") as duracao, foto_capa, link_trailer, classificacao_id from tbl_filme order by nome asc'
-    
+        
         // $queryrawUnsafe(‘encaminha apenas a variavel’)
         // $queryRaw(‘codigo digitado aqui’)
     

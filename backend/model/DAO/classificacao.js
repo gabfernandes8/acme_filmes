@@ -9,7 +9,7 @@
 const { PrismaClient } = require('@prisma/client')
 
 // instanciando o objeto prisma com as caracteristicas do prisma client
-const prisma = new PrismaClient
+const prisma = new PrismaClient()
 
 // inserir uma nova classificacao
 const insertClassificacao = async (dadosClassificacao) => {
@@ -113,6 +113,7 @@ const selectAllClassificacao = async () => {
         let rsClassificacao = await prisma.$queryRawUnsafe(sql)
         return rsClassificacao
     } catch (error) {
+        console.log(error);
         return false
     }
 }
